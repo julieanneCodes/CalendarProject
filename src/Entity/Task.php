@@ -67,32 +67,4 @@ class Task
 
         return $this;
     }
-
-    /**
-     * @return Collection|Day[]
-     */
-    public function getDays(): Collection
-    {
-        return $this->days;
-    }
-
-    public function addDay(Day $day): self
-    {
-        if (!$this->days->contains($day)) {
-            $this->days[] = $day;
-            $day->addTaskIdDay($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDay(Day $day): self
-    {
-        if ($this->days->contains($day)) {
-            $this->days->removeElement($day);
-            $day->removeTaskIdDay($this);
-        }
-
-        return $this;
-    }
 }
