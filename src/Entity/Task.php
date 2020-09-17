@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,28 +18,35 @@ class Task
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tasks")
+     */
+    private $user;
+
+    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $day;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="task", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="task_day")
      */
-    private $id_user;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Day::class, mappedBy="taskIdDay")
-     */
-    private $days;
-
-    public function __construct()
-    {
-        $this->days = new ArrayCollection();
-    }
+    private $day_taskId;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function getDay(): ?\DateTimeInterface
@@ -56,14 +61,14 @@ class Task
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getDayTaskId(): ?Day
     {
-        return $this->id_user;
+        return $this->day_taskId;
     }
 
-    public function setIdUser(?User $id_user): self
+    public function setDayTaskId(?Day $day_taskId): self
     {
-        $this->id_user = $id_user;
+        $this->day_taskId = $day_taskId;
 
         return $this;
     }

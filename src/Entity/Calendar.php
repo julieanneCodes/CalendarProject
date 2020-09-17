@@ -28,16 +28,14 @@ class Calendar
     private $day;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="calendar", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="calendars")
      */
-    private $id_user;
+    private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Day::class, inversedBy="calendarDayid")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="calendar_day")
      */
-    private $calendarDay;
+    private $calendar_idDay;
 
     public function getId(): ?int
     {
@@ -68,26 +66,26 @@ class Calendar
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getUser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser(User $id_user): self
+    public function setUser(?User $user): self
     {
-        $this->id_user = $id_user;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getCalendarDay(): ?Day
+    public function getCalendarIdDay(): ?Day
     {
-        return $this->calendarDay;
+        return $this->calendar_idDay;
     }
 
-    public function setCalendarDay(?Day $calendarDay): self
+    public function setCalendarIdDay(?Day $calendar_idDay): self
     {
-        $this->calendarDay = $calendarDay;
+        $this->calendar_idDay = $calendar_idDay;
 
         return $this;
     }

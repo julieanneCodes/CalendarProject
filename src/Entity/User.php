@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,14 +35,20 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=Calendar::class, mappedBy="id_user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="user")
      */
-    private $calendar;
+    private $calendars;
 
     /**
-     * @ORM\OneToOne(targetEntity=Task::class, mappedBy="id_user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="user")
      */
-    private $task;
+    private $tasks;
+
+    public function __construct()
+    {
+        $this->calendars = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -83,36 +91,63 @@ class User
         return $this;
     }
 
-    public function getCalendar(): ?Calendar
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getCalendars(): Collection
     {
-        return $this->calendar;
+        return $this->calendars;
     }
 
-    public function setCalendar(Calendar $calendar): self
+    public function addCalendar(Calendar $calendar): self
     {
-        $this->calendar = $calendar;
-
-        // set the owning side of the relation if necessary
-        if ($calendar->getIdUser() !== $this) {
-            $calendar->setIdUser($this);
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setUser($this);
         }
 
         return $this;
     }
 
-    public function getTask(): ?Task
+    public function removeCalendar(Calendar $calendar): self
     {
-        return $this->task;
+        if ($this->calendars->contains($calendar)) {
+            $this->calendars->removeElement($calendar);
+            // set the owning side to null (unless already changed)
+            if ($calendar->getUser() === $this) {
+                $calendar->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
-    public function setTask(?Task $task): self
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
     {
-        $this->task = $task;
+        return $this->tasks;
+    }
 
-        // set (or unset) the owning side of the relation if necessary
-        $newId_user = null === $task ? null : $this;
-        if ($task->getIdUser() !== $newId_user) {
-            $task->setIdUser($newId_user);
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getUser() === $this) {
+                $task->setUser(null);
+            }
         }
 
         return $this;
