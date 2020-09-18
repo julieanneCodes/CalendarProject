@@ -25,9 +25,9 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
+    /*
      * @Route("/new", name="user_new", methods={"GET","POST"})
-     */
+     
     public function new(Request $request): Response
     {
         $user = new User();
@@ -46,7 +46,7 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
@@ -63,7 +63,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

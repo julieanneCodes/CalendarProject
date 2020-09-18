@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -45,6 +45,12 @@ class User
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="user")
      */
     private $tasks;
+
+    /**
+     *@ORM\OneToOne(targetEntity=UserConfig::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $config_id;
 
     public function __construct()
     {
@@ -167,6 +173,18 @@ class User
         return $this;
     }
 
+    public function getConfigId(): ?UserConfig
+    {
+        return $this->config_id;
+    }
+
+    public function setUserConfig(UserConfig $config_id): self
+    {
+        $this->config_id = $config_id;
+
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->id;
@@ -187,5 +205,10 @@ class User
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getRoles()
+    {
+        
     }
 }

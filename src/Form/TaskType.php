@@ -20,6 +20,7 @@ class TaskType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'id',
             ])
+            ->add('notes')
         ;
     }
 
