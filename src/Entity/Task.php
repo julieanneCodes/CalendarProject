@@ -28,9 +28,14 @@ class Task
     private $day;
 
     /**
-     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="task_day")
+     * @ORM\Column(type="string", length=20)
      */
-    private $day_taskId;
+    private $task_name;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $notes;
 
     public function getId(): ?int
     {
@@ -61,14 +66,26 @@ class Task
         return $this;
     }
 
-    public function getDayTaskId(): ?Day
+    public function getTaskName(): ?string
     {
-        return $this->day_taskId;
+        return $this->task_name;
     }
 
-    public function setDayTaskId(?Day $day_taskId): self
+    public function setTaskName(string $task_name): self
     {
-        $this->day_taskId = $day_taskId;
+        $this->task_name = $task_name;
+
+        return $this;
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(string $notes): self
+    {
+        $this->notes = $notes;
 
         return $this;
     }

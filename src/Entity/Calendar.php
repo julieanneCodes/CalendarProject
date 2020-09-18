@@ -33,9 +33,14 @@ class Calendar
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="calendar_day")
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $calendar_idDay;
+    private $notes;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $event_name;
 
     public function getId(): ?int
     {
@@ -78,14 +83,26 @@ class Calendar
         return $this;
     }
 
-    public function getCalendarIdDay(): ?Day
+    public function getNotes(): ?string
     {
-        return $this->calendar_idDay;
+        return $this->notes;
     }
 
-    public function setCalendarIdDay(?Day $calendar_idDay): self
+    public function setNotes(?string $notes): self
     {
-        $this->calendar_idDay = $calendar_idDay;
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getEventName(): ?string
+    {
+        return $this->event_name;
+    }
+
+    public function setEventName(string $event_name): self
+    {
+        $this->event_name = $event_name;
 
         return $this;
     }
