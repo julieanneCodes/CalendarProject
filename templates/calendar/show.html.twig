@@ -9,11 +9,7 @@
         <tbody>
             <tr>
                 <th>Event Name</th>
-                <td>{{ calendar.event_name }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.eventname }}</td>
             </tr>
             <tr>
                 <th>Time</th>
@@ -23,6 +19,9 @@
                 <th>Day</th>
                 <td>{{ calendar.day ? calendar.day|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ calendar.notes }}</td>
         </tbody>
     </table>
 

@@ -9,16 +9,17 @@
         <thead>
             <tr>
                 <th>Task</th>
-                <th>Id</th>
                 <th>Day</th>
+                <th>Notes</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for task in tasks %}
             <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.day ? task.day|date('Y-m-d') : '' }}</td>
+                <td>{{ task.taskName }}</td>
+                <td>{{ task.day ? task.day|date('d-m-Y') : '' }}</td>
+                <td>{{ task.notes }}</td>
                 <td>
                     <a href="{{ path('task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>

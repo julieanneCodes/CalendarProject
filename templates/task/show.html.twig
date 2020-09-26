@@ -7,14 +7,18 @@
 
     <table class="table">
         <tbody>
+
             <tr>
-                <th>Id</th>
-                <td>{{ task.id }}</td>
+                <th>Task</th>
+                <td>{{ task.Taskname }}</td>
             </tr>
             <tr>
                 <th>Day</th>
                 <td>{{ task.day ? task.day|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ task.notes }}</td>
         </tbody>
     </table>
 
