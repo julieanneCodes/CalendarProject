@@ -25,9 +25,9 @@ class TaskType extends AbstractType
         $builder
             ->add('task_name')
             ->add('day', DateType::class, [
-                'placeholder' => ['year' => 'Año', 'month' => 'mes', 'day' => 'día'],
-                'widget' => 'choice',
-                'years' => range(2020,2025),
+                #'placeholder' => ['year' => 'Año', 'month' => 'mes', 'day' => 'día'],
+                'widget' => 'single_text',
+                #'years' => range(2020,2025),
             ])
             ->add('user', HiddenIdType::class)
             ->add('notes');

@@ -26,9 +26,10 @@ class CalendarType extends AbstractType
             ->add('event_name')
             ->add('time')
             ->add('day', DateType::class, [
-                'placeholder' => ['year' => 'Año', 'month' => 'mes', 'day' => 'día'],
-                'widget' => 'choice',
-                'years' => range(2020,2025),
+                #'placeholder' => ['year' => date('Y'), 'day' => date('d'), 'month' => date('m')],
+                'widget' => 'single_text',
+                #'years' => range(2020,2025),
+                #'format' => 'ddMMyyyy'
             ])
             ->add('user', HiddenIdType::class)
             ->add('notes');
