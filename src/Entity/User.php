@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +12,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *      fields={"email"},
+ *      message="This email is already in use"
+ * )
  */
 class User implements UserInterface
 {
@@ -22,17 +28,40 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "Write a valid email adress"
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 3, 
+     *     minMessage = "Name should have 3 characters or more"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/\d/",
+     *     match = false,
+     *     message = "Your name cannot contain numbers"
+     * )
      */
     private $name;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 8,
+     *     minMessage = "Password must have 8 characters or more"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/\d[A-Z]/",
+     *     message = "Password must contain a number and a capital letter"
+     * )
      */
     private $password;
 
@@ -207,8 +236,5 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getRoles()
-    {
-        
-    }
+    public function getRoles(){}
 }
