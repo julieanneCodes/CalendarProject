@@ -22,12 +22,14 @@ class TaskType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $currentDate = date('Y-m-d');
         $builder
             ->add('task_name')
             ->add('day', DateType::class, [
-                #'placeholder' => ['year' => 'Año', 'month' => 'mes', 'day' => 'día'],
                 'widget' => 'single_text',
-                #'years' => range(2020,2025),
+                'attr' => [
+                    'value' => $currentDate,
+                ]
             ])
             ->add('user', HiddenIdType::class)
             ->add('notes');

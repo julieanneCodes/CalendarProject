@@ -7,6 +7,7 @@ use App\Form\DataTransformer\UserIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\Form\Type\HiddenIdType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,17 +20,25 @@ class CalendarType extends AbstractType
     {
         $this->transformer= $transformer;
     }
-
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $currentDate = date('Y-m-d');
+        $currentTime = date('H:i', strtotime('+1 Hour'));
         $builder
             ->add('event_name')
-            ->add('time')
-            ->add('day', DateType::class, [
-                #'placeholder' => ['year' => date('Y'), 'day' => date('d'), 'month' => date('m')],
+            ->add('time', TimeType::class, [
                 'widget' => 'single_text',
-                #'years' => range(2020,2025),
-                #'format' => 'ddMMyyyy'
+                'attr' => [
+                  'value' => $currentTime
+                ]
+            ])
+            ->add('day', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'min' => $currentDate, 
+                    'value' => $currentDate
+                ],
             ])
             ->add('user', HiddenIdType::class)
             ->add('notes');
