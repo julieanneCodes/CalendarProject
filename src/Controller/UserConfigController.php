@@ -37,9 +37,10 @@ class UserConfigController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userConfig);
+            $user = $userConfig->getUser();
+            $user->setUserConfig($userConfig);
             $entityManager->flush();
-
-            return $this->redirectToRoute('user_config_index');
+            return $this->redirectToRoute('calendar_index');
         }
 
         return $this->render('user_config/new.html.twig', [
