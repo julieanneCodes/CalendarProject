@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home {% endblock %}
+
+{% block body %}
+    <h1>Home page</h1>
+    <a href="{{ path('app_login') }}">Sign in</a>
+    {{ include('home/_form.html.twig')}}
+{% endblock %}
