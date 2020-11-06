@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\SignUpType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +22,7 @@ class HomeController extends AbstractController
         {
             $email = $_POST["sign_up"]["email"];
             $finded = false;
+            $_SESSION["email"] = $email;
             foreach($users as $userM) {
               if(strcasecmp($email, $userM["email"]) == 0 ) {$finded = true;}  
             }

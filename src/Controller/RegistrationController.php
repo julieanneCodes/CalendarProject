@@ -20,7 +20,6 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 
@@ -39,8 +38,9 @@ class RegistrationController extends AbstractController
             );
             return $this->redirectToRoute('user_config_new');
         }
+        $email = isset($_SESSION["email"]) ? $_SESSION["email"] : "";
         return $this->render('registration/new.html.twig', 
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'email' => $email)
         );
     }
 }

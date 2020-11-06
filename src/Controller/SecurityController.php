@@ -14,14 +14,13 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        
          if ($this->getUser()) {
              return $this->redirectToRoute('calendar_index');
         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        $email = isset($_POST["sign_up"]["email"]) ? $_POST["sign_up"]["email"] : ""; 
+        $email = isset($_SESSION["email"]) ? $_SESSION["email"] : ""; 
         return $this->render('security/login.html.twig', ['email' => $email, 'error' => $error]);
     }
 
