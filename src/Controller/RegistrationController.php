@@ -25,7 +25,6 @@ class RegistrationController extends AbstractController
 
             $password= $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
