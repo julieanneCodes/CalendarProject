@@ -1,5 +1,6 @@
 {{ form_start(form) }}
-    <input type="email" id="user_email" value="{{ email }}" name="user[email]" required="required"/>
-    {{ form_widget(form) }}
+    {# does **not** work - the variables are not recursive #}
+    {{ form_widget(form, { 'attr': {'class': 'userForm'} }) }}
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

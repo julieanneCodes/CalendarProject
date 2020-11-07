@@ -236,5 +236,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getRoles(){}
+    public function getRoles(){
+        return array('ROLE_USER');
+    }
 }
