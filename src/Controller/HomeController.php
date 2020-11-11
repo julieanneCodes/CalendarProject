@@ -14,7 +14,7 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      */
     public function index(Request $request, UserRepository $userRepository)
-    {   
+    {  
         $users = $userRepository->findAllByEmail();
         $form = $this->createForm(SignUpType::class);
         $form->handleRequest($request);

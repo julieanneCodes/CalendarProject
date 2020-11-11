@@ -76,10 +76,9 @@ class User implements UserInterface
     private $tasks;
 
     /**
-     *@ORM\OneToOne(targetEntity=UserConfig::class, mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity=ViewConfig::class, inversedBy="panel_view")
      */
-    private $config_id;
+    private $viewConfig;
 
     public function __construct()
     {
@@ -202,18 +201,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getConfigId(): ?UserConfig
-    {
-        return $this->config_id;
-    }
-
-    public function setUserConfig(UserConfig $config_id): self
-    {
-        $this->config_id = $config_id;
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->id;
@@ -238,5 +225,17 @@ class User implements UserInterface
 
     public function getRoles(){
         return array('ROLE_USER');
+    }
+
+    public function getViewConfig(): ?ViewConfig
+    {
+        return $this->viewConfig;
+    }
+
+    public function setViewConfig(?ViewConfig $viewConfig): self
+    {
+        $this->viewConfig = $viewConfig;
+
+        return $this;
     }
 }

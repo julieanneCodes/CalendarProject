@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ViewConfig{% endblock %}
+
+{% block body %}
+    <h1>Create new ViewConfig</h1>
+
+    {{ include('view_config/_form.html.twig') }}
+
+    <a href="{{ path('view_config_index') }}">back to list</a>
+{% endblock %}

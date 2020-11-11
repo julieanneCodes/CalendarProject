@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ViewConfig{% endblock %}
+
+{% block body %}
+    <h1>ViewConfig</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ view_config.id }}</td>
+            </tr>
+            <tr>
+                <th>Panel_name</th>
+                <td>{{ view_config.panelName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('view_config_index') }}">back to list</a>
+
+    <a href="{{ path('view_config_edit', {'id': view_config.id}) }}">edit</a>
+
+    {{ include('view_config/_delete_form.html.twig') }}
+{% endblock %}
