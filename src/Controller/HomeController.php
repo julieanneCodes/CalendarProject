@@ -7,7 +7,6 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
 class HomeController extends AbstractController
 {
     /**
@@ -23,13 +22,15 @@ class HomeController extends AbstractController
             $email = $_POST["sign_up"]["email"];
             $finded = false;
             $_SESSION["email"] = $email;
+
             foreach($users as $userM) {
               if(strcasecmp($email, $userM["email"]) == 0 ) {$finded = true;}  
             }
+            
             if($finded) {
                 return $this->redirectToRoute('app_login');
             } else {
-                return $this->redirectToRoute('user_register');
+                return $this->redirectToRoute('user_register', ['email' => $email]);
             }   
         }
         return $this->render('home/index.html.twig', [

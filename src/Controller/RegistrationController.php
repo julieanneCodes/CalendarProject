@@ -20,7 +20,6 @@ class RegistrationController extends AbstractController
     public function register(LoginFormAuthAuthenticator $authenticator, GuardAuthenticatorHandler $guard, Request $request, UserPasswordEncoderInterface $passwordEncoder, ViewConfigRepository $configRepo)
     {
         $defaultView = $configRepo->findOneBy(['id' => 1]);
-        $email = isset($_SESSION["email"]) ? $_SESSION["email"] : "";
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
