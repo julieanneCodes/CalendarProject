@@ -1,0 +1,13 @@
+.pseudoHeader {
+  display: flex;
+  position: relative;
+}
+a {
+  position: absolute;
+  right: 10px;
+  top: 33px;
+}
+.emailForm {
+  width: 75%;
+  margin: auto;
+}

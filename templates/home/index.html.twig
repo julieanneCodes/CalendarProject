@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+<link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
+{% endblock %}
 {% block title %}Home {% endblock %}
 
 {% block body %}
-    <h1>Home page</h1>
-    <a href="{{ path('app_login') }}">Sign in</a>
-    {{ include('home/_form.html.twig')}}
+    <div class="container">
+        <div class="pseudoHeader">
+            <h1>App name</h1>
+            <a href="{{ path('app_login') }}">Sign in</a>
+        </div>
+        {{ include('home/_form.html.twig')}}
+    </div>
 {% endblock %}

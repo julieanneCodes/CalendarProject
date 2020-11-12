@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -13,10 +14,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'data' => $_GET['email']
+            ])
             ->add('name', TextType::class)
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -28,8 +32,10 @@ class UserType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        //session_reset();
+
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => User::class
         ]);
     }
 }
