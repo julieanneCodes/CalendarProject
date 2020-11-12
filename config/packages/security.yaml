@@ -39,4 +39,5 @@ security:
          - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/task, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/view/config, roles: IS_AUTHENTICATED_FULLY }
 
