@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-<link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block title %}Home {% endblock %}
 
@@ -8,8 +8,30 @@
     <div class="container">
         <div class="pseudoHeader">
             <h1>App name</h1>
-            <a href="{{ path('app_login') }}">Sign in</a>
+            <div class="btnSignIn">
+                <a href="{{ path('app_login') }}">Sign in</a>
+            </div>
         </div>
-        {{ include('home/_form.html.twig')}}
+        <div class="contents">
+            <div class="info">
+                <h1>TEXTO</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus lacus vel quam dapibus, ac fermentum turpis placerat. Integer augue lectus, tincidunt id ante ut, fermentum posuere justo. Aliquam nec dolor mollis, efficitur erat tempus, viverra tellus. Duis vel eleifend diam. Sed suscipit ipsum lorem</p>
+            </div>
+            {{ include('home/_form.html.twig')}}
+        </div>
+        <div class="features">
+            <div class="featContents">
+                <div class="iconWrap"><span class="material-icons mIcon">date_range</span></div>
+                <p>Lorem ipsum dolor sit amet</p>
+            </div>
+            <div class="featContents">
+                <div class="iconWrap"><span class="material-icons mIcon">fact_check</span></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus lacus vel quam dapibus</p>
+            </div>
+            <div class="featContents">
+                <div class="iconWrap"><span class="material-icons mIcon">account_circle</span></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus lacus vel quam dapibus, ac fermentum turpis placerat</p>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -1,6 +1,8 @@
-{{ form_start(form) }}
-    <div class="emailForm">
-        {{ form_widget(form) }}
-        <button class="btn">Sign Up</button>
-    </div>
-{{ form_end(form) }}
+<div class="emailForm">
+    {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="btnWrap">
+                <button class="btn">Sign Up</button>
+            </div>
+    {{ form_end(form) }}
+</div>
