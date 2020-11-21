@@ -1,0 +1,58 @@
+.container {
+  position: relative;
+}
+.loginEmail, .loginPasswd {
+  margin: 5px 0px;
+  width: 100%;
+}
+.btnWrap {
+  width: 80%;
+  height: 40px;
+  margin: auto;
+  margin-top: 10px;
+}
+.btn {
+  width: 100%;
+  height: inherit;
+  margin: auto;
+}
+.loginForm {
+  width: 80%;
+  margin: auto;
+  margin-top: 40px;
+}
+.lbl {
+  width: 100%;
+  display: inline-block;
+}
+.title {
+  width: 80%;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .loginForm, .btnWrap {
+    width: 60%;
+  }
+  .loginEmail, .loginPasswd {
+    height: 40px;
+  }
+  .title {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .loginForm, .btnWrap {
+    width: 50%;
+  }
+  .title {
+    width: 20%;
+  }
+}
+
+@media(min-width: 1440px) {
+  .loginForm, .btnWrap {
+    width: 40%;
+  }
+}
