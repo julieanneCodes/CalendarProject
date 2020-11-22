@@ -1,11 +1,6 @@
 .container {
   position: relative;
 }
-.pseudoHeader {
-  display: flex;
-  position: relative;
-  align-items: baseline;
-}
 a {
   text-decoration: none;
 }
@@ -84,9 +79,6 @@ a {
   }
   #sign_up {
     margin-top: 70px;
-  }
-  .btnSignIn {
-    width: 70px;
   }
 }
 

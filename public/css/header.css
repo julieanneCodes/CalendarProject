@@ -1,3 +1,25 @@
 .home {
   text-decoration: none;
 }
+.pseudoHeader {
+  display: flex;
+  position: relative;
+  align-items: baseline;
+}
+.btnSignIn {
+  border: 1px solid black;
+  height: 30px;
+  width: 65px;
+  position: absolute;
+  right: 0px;
+  top: 30px;
+  text-align: center;
+  padding-top: 3px;
+  border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .btnSignIn {
+    width: 70px;
+  }
+}

@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}New User{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('css/form.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block title %}Bethink | Register{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    {{ include('header.html.twig') }}
+    <h1>Complete the form to start your account</h1>
 
     {{ include('user/_form.html.twig') }}
 
