@@ -40,4 +40,6 @@ security:
          - { path: ^/task, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/user, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/view/config, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/double, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/single, roles: IS_AUTHENTICATED_FULLY }
 

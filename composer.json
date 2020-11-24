@@ -8,6 +8,7 @@
         "ext-iconv": "*",
         "ext-simplexml": "^7.4",
         "composer/package-versions-deprecated": "^1.11",
+        "doctrine/annotations": "^1.11",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
@@ -22,6 +23,7 @@
         "symfony/security-csrf": "5.1.*",
         "symfony/twig-bundle": "5.1.*",
         "symfony/validator": "5.1.*",
+        "symfony/webpack-encore-bundle": "^1.8",
         "symfony/yaml": "5.1.*"
     },
     "require-dev": {
