@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet"/>
+    {{ encore_entry_link_tags('login') }}
 {% endblock %}
 {% block title %}Bethink | Log in{% endblock %}
 
 {% block body %}
     <div class="container">
+        {{ include('common-header.html.twig') }}
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            <div class="title">
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            </div>
             <div class="loginForm">
+                <div class="title">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                </div>
                 <label for="inputEmail" class="lbl">Email</label>
                 <input type="email" value="{{ email }}" name="email" id="inputEmail" class="form-control loginEmail" required autofocus>
                 <label for="inputPassword" class="lbl">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control loginPasswd" required>
-            </div>
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
             >
@@ -39,6 +39,7 @@
                     Sign in
                 </button>
             </div>
+        </div>
         </form>
     </div>
 {% endblock %}

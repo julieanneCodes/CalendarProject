@@ -1,0 +1,12 @@
+.searcherB {
+  border-color:  #5F8FB4;
+  background-color:  #5F8FB4;
+  border-radius: 5px;
+}
+.glass {
+  color: whitesmoke;
+}
+.searcher {
+  position: relative;
+  align-items: center;
+}

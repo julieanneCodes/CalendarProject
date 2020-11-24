@@ -2,5 +2,7 @@
     {# does **not** work - the variables are not recursive #}
     {{ form_widget(form, { 'attr': {'class': 'userForm'} }) }}
     
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="btnWrap">
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
 {{ form_end(form) }}

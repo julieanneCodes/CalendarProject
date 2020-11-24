@@ -1,0 +1,17 @@
+{% block stylesheets %}
+    {{ encore_entry_link_tags('header') }}
+{% endblock %}
+{% block body %}
+  <div class="pseudoHeader">
+            <a href="{{ path('home') }}" class="home"><h1>Bethink</h1></a>
+            <span class="material-icons leaf">eco</span>
+            <div class="userWrap">
+              <a href="{{ path('user_edit', {'id': user.id}) }}">
+                <span class="material-icons user">account_circle</span>
+              </a>
+            </div>
+            <div class="burgerMenu">
+                <button class="burger"><span class="material-icons menu">menu</span></button>
+            </div>
+        </div>
+{% endblock %}

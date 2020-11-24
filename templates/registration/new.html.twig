@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link href="{{ asset('css/form.css') }}" rel="stylesheet"/>
+    {{ encore_entry_link_tags('form') }}
 {% endblock %}
 {% block title %}Bethink | Register{% endblock %}
 
 {% block body %}
-    {{ include('header.html.twig') }}
-    <h1>Complete the form to start your account</h1>
+    {{ include('common-header.html.twig') }}
+    <div class="container">
+        <h1>Complete the form to start your account</h1>
 
-    {{ include('user/_form.html.twig') }}
-
-    <!-- <a href="{{ path('user_index') }}">back to list</a> -->
+        {{ include('user/_form.html.twig') }}
+    </div>    
 {% endblock %}

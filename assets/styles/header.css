@@ -1,0 +1,58 @@
+.home {
+  text-decoration: none;
+}
+.pseudoHeader {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+.btnSignIn {
+  border: 1px solid black;
+  height: 30px;
+  width: 65px;
+  position: absolute;
+  right: 0px;
+  top: 30px;
+  text-align: center;
+  padding-top: 3px;
+  border-radius: 5px;
+}
+.leaf, .user, .menu {
+  font-size: 40px;
+}
+.home, .leaf, .user, .menu {
+  color: #5F8FB4;
+}
+.burger {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.burgerMenu {
+  position: relative;
+}
+.userWrap {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .btnSignIn {
+    width: 70px;
+    right: 15px;
+  }
+  .pseudoHeader {
+    margin-top: 10px;
+  }
+  .home {
+    left: 15px;
+    position: relative;
+  }
+  .leaf {
+    left: 20px;
+    position: relative;
+  }
+}
+
+@media (min-width: 1024px) {
+  
+}

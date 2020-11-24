@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
+     {{ encore_entry_link_tags('home') }}
 {% endblock %}
 {% block title %}Home {% endblock %}
 
 {% block body %}
     <div class="container">
-        {{ include('header.html.twig') }}
+        {{ include('common-header.html.twig') }}
         <div class="contents">
             <div class="info">
-                <h1>TEXTO</h1>
+                <h1>TEXTO o algo</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus lacus vel quam dapibus, ac fermentum turpis placerat. Integer augue lectus, tincidunt id ante ut, fermentum posuere justo. Aliquam nec dolor mollis, efficitur erat tempus, viverra tellus. Duis vel eleifend diam. Sed suscipit ipsum lorem</p>
             </div>
             {{ include('home/_form.html.twig') }}

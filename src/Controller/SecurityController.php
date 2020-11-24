@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\ViewConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +14,14 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, ViewConfigRepository $configRepo): Response
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('calendar_index');
+        $defaultView = $configRepo->findOneBy(['id' => 1]);
+        $singleView = $configRepo->findOneBy(['id' => 2]);
+         if ($this->getUser() && $this->getUser()->getViewConfig() == $defaultView ) {
+             return $this->redirectToRoute('double');
+        } else if($this->getUser() && $this->getUser()->getViewConfig() == $singleView) {
+            return $this->redirectToRoute('single');
         }
 
         // get the login error if there is one

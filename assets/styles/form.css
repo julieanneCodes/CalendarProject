@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  padding: 10px;
+}
+.userForm div {
+  display: grid;
+  width: 80%;
+  margin: auto;
+}
+h1 {
+  text-align: center;
+}
+.btnWrap {
+  width: 70%;
+  margin: auto;
+}
+.btn {
+  width: 100%;
+}
+label {
+  margin: 5px 0px;
+}

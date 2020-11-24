@@ -1,9 +1,10 @@
 {% block stylesheets %}
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet"/>
+    {{ encore_entry_link_tags('header') }}
 {% endblock %}
 {% block body %}
   <div class="pseudoHeader">
             <a href="{{ path('home') }}" class="home"><h1>Bethink</h1></a>
+            <span class="material-icons leaf">eco</span>
             <div class="btnSignIn">
                 <a href="{{ path('app_login') }}">Sign in</a>
             </div>
