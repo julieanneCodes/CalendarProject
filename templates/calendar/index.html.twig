@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Calendar index{% endblock %}
-
 {% block body %}
     {{ include('user-header.html.twig') }}
     {{ include('search/searcher.html.twig') }}
@@ -36,9 +35,5 @@
 
     <a href="{{ path('calendar_new') }}">Create new</a>
     <a href="{{ path('task_index')}}">View tasks</a>
-    <div id="root"></div>
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('calendar') }}
-    {% endblock %}
+    <calendar-component>
 {% endblock %}
