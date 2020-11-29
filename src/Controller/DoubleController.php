@@ -13,8 +13,6 @@ class DoubleController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('double/index.html.twig', [
-            'controller_name' => 'DoubleController',
-        ]);
+        return $this->redirectToRoute('calendar_index');
     }
 }
