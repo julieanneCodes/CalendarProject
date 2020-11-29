@@ -25,7 +25,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('func', './assets/js/functions.js')
-    .addEntry('calendar', './assets/js/calendar.js')
+    .addEntry('calendar','./assets/js/components/calendar.js')
     .addEntry('config', './assets/styles/config.css')
     .addEntry('customized', './assets/styles/customized.css')
     .addEntry('double', './assets/styles/double.css')

@@ -30,6 +30,7 @@ class CalendarController extends AbstractController
         $id = $user->getId();
         return $this->render('calendar/index.html.twig', [
             'calendars' => $calendarRepository->findAllById($id),
+            'data' => $calendarRepository->findAllById($id),
             'user' => $user,
         ]);
     }
