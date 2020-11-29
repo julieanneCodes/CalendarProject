@@ -30,6 +30,15 @@ class CalendarRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllById($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getResult();
+    }
     /*
     public function findOneBySomeField($value): ?Calendar
     {
