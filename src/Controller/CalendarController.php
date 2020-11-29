@@ -27,8 +27,9 @@ class CalendarController extends AbstractController
     public function index(CalendarRepository $calendarRepository): Response
     {
         $user = $this->security->getUser();
+        $id = $user->getId();
         return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findAll(),
+            'calendars' => $calendarRepository->findAllById($id),
             'user' => $user,
         ]);
     }

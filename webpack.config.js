@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('func', './assets/js/functions.js')
+    .addEntry('calendar', './assets/js/calendar.js')
     .addEntry('config', './assets/styles/config.css')
     .addEntry('customized', './assets/styles/customized.css')
     .addEntry('double', './assets/styles/double.css')
@@ -76,7 +77,7 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
 
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
+    .enableReactPreset()
     //.addEntry('admin', './assets/admin.js')
 ;
 

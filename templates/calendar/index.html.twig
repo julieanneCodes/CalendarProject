@@ -36,4 +36,9 @@
 
     <a href="{{ path('calendar_new') }}">Create new</a>
     <a href="{{ path('task_index')}}">View tasks</a>
+    <div id="root"></div>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('calendar') }}
+    {% endblock %}
 {% endblock %}
