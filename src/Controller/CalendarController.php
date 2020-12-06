@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-
+use Symfony\Component\Serializer\SerializerInterface;
 /**
  * @Route("/calendar")
  */
@@ -24,13 +24,14 @@ class CalendarController extends AbstractController
     /**
      * @Route("/", name="calendar_index", methods={"GET"})
      */
-    public function index(CalendarRepository $calendarRepository): Response
+    public function index(CalendarRepository $calendarRepository, SerializerInterface $serializer): Response
     {
         $user = $this->security->getUser();
         $id = $user->getId();
+        $jsonData = $serializer->serialize($calendarRepository->findAllById($id), 'json', ['groups' => 'calendar_data']);
         return $this->render('calendar/index.html.twig', [
             'calendars' => $calendarRepository->findAllById($id),
-            'data' => $calendarRepository->findAllById($id),
+            'data' => $jsonData,
             'user' => $user,
         ]);
     }

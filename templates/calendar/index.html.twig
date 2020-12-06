@@ -32,8 +32,8 @@
         {% endfor %}
         </tbody>
     </table>
-
+    
     <a href="{{ path('calendar_new') }}">Create new</a>
     <a href="{{ path('task_index')}}">View tasks</a>
-    <calendar-component>
+    <calendar-component id="content" data="{{ data }}">
 {% endblock %}

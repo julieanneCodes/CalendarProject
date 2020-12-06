@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\CalendarRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CalendarRepository::class)
@@ -19,11 +19,14 @@ class Calendar
 
     /**
      * @ORM\Column(type="time")
+     * @Groups({"calendar_data"})
+     * 
      */
     private $time;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"calendar_data"})
      */
     private $day;
 
@@ -34,13 +37,15 @@ class Calendar
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"calendar_data"})
      */
     private $notes;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Groups({"calendar_data"})
      */
-    private $event_name;
+    private $eventname;
 
     public function getId(): ?int
     {
@@ -97,12 +102,12 @@ class Calendar
 
     public function getEventName(): ?string
     {
-        return $this->event_name;
+        return $this->eventname;
     }
 
-    public function setEventName(string $event_name): self
+    public function setEventName(string $eventname): self
     {
-        $this->event_name = $event_name;
+        $this->eventname = $eventname;
 
         return $this;
     }
