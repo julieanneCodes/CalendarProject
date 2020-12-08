@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('func', './assets/js/functions.js')
+    .addEntry('burger-menu', './assets/js/burger-menu.js')
     .addEntry('calendar','./assets/js/components/calendar.js')
     .addEntry('config', './assets/styles/config.css')
     .addEntry('customized', './assets/styles/customized.css')
@@ -35,8 +36,6 @@ Encore
     .addEntry('login', './assets/styles/login.css')
     .addEntry('single', './assets/styles/single.css')
     .addEntry('searcher', './assets/styles/searcher.css')
-    //.addEntry('page1', './assets/page1.js')
-    //.addEntry('page2', './assets/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

@@ -6,12 +6,13 @@
             <a href="{{ path('home') }}" class="home"><h1>Bethink</h1></a>
             <span class="material-icons leaf">eco</span>
             <div class="userWrap">
-              <a href="{{ path('user_edit', {'id': user.id}) }}">
-                <span class="material-icons user">account_circle</span>
-              </a>
             </div>
             <div class="burgerMenu">
-                <button class="burger"><span class="material-icons menu">menu</span></button>
+                <button class="burger material-icons menu">menu</button>
             </div>
         </div>
+  <div>{{ include('burger-menu.html.twig') }}</div>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('burger-menu') }}
 {% endblock %}
