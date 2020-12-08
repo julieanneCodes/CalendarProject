@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
          if ($this->getUser() && $this->getUser()->getViewConfig() == $defaultView ) {
              return $this->redirectToRoute('double');
         } else if($this->getUser() && $this->getUser()->getViewConfig() == $singleView) {
-            return $this->redirectToRoute('single');
+            return $this->redirectToRoute('single-calendar');
         }
 
         // get the login error if there is one
