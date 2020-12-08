@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TaskRepository::class)
@@ -24,16 +24,19 @@ class Task
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"tasks_data"})
      */
     private $day;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Groups({"tasks_data"})
      */
-    private $task_name;
+    private $taskname;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"tasks_data"})
      */
     private $notes;
 
@@ -68,12 +71,12 @@ class Task
 
     public function getTaskName(): ?string
     {
-        return $this->task_name;
+        return $this->taskname;
     }
 
-    public function setTaskName(string $task_name): self
+    public function setTaskName(string $taskname): self
     {
-        $this->task_name = $task_name;
+        $this->taskname = $taskname;
 
         return $this;
     }

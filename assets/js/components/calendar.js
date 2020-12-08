@@ -1,7 +1,13 @@
+import dayjs from 'dayjs';
 import {LitElement, html} from 'lit-element';
-import { nothing } from 'lit-html';
 import { calendarStyles } from '../css/calendar-styles';
-import { months } from '../utils/constants';
+import { months, days } from '../utils/constants';
+
+const weekday = require('dayjs/plugin/weekday');
+const weekOfYear = require('dayjs/plugin/weekOfYear');
+
+dayjs.extend(weekday);
+dayjs.extend(weekOfYear);
 class Calendar extends LitElement {
     static get styles() {
         return [calendarStyles]
@@ -16,7 +22,8 @@ class Calendar extends LitElement {
             data: { type: Array },
             dataYears: { type: Array },
             dataMonths: { type: Array },
-            dataDays: { type: Array }
+            dataDays: { type: Array },
+            daysNames: { type: Array }
 
         };
     }
@@ -25,6 +32,7 @@ class Calendar extends LitElement {
         super();
         this.daysArray = [];
         this.months = [...months];
+        this.daysNames = [...days];
         this.data = [];
         this.dataDays = [];
         this.dataYears = [];
@@ -35,6 +43,7 @@ class Calendar extends LitElement {
     }
 
     init() {
+        
         this.data.forEach(element => {
             this.dataMonths.push(new Date(element['day']).getMonth());
             this.dataYears.push(new Date(element['day']).getFullYear());
@@ -55,35 +64,31 @@ class Calendar extends LitElement {
             this.currentDate = new Date(year, month +1);
         }
     }
-    /*modal() {
-        const calendarWrap = this.shadowRoot.querySelector('.calendarWrap');
-        calendarWrap.setAttribute('display', 'none');
-        console.log('aaaa');
-        return html`
-            <div class="modal">
-                <div class="modal-content">
-                    <span class="close-btn">&times;</span>
-                        <p>this is the text inside the modal</p>
-                </div>
-            </div>
-        `
-    }*/
-
+    
     calendar(date) {
-        console.log(this.data);
         this.days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+
+        // const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        // const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         this.currentMonth = this.currentDate.getMonth();
         const arr = [];
-        for(let i=1; i<=this.days; i++) {
+        arr.length = 42;
+        console.log(arr)
+        /*const arrTwo = [];
+        for(let i=1; i<=num; i++) {
             arr.push(i);
         }
-        this.daysArray = [...arr];
+        for(let x=1;x<=this.days;x++) {
+            arrTwo.push(x);
+        }
+        this.daysArray = [...arrTwo];*/
         return html`
             <div>${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
             <div class="calendarWrap">
-                ${this.daysArray.map((day, i) => html`
-                <div @click="${this.modal}">${day}</div>
-                `)}
+                ${this.daysNames.map(day => html`<div class="namesWrap">${day}</div>`)}
+                <!-- ${arr.map((day,i)=> html`
+                <div class="daysWrap" id=${day}></div>
+                `)} -->
             </div>
         `;
     }

@@ -24,9 +24,10 @@ class CalendarController extends AbstractController
     /**
      * @Route("/", name="calendar_index", methods={"GET"})
      */
-    public function index(CalendarRepository $calendarRepository, SerializerInterface $serializer): Response
+    /*
+    public function index(CalendarRepository $calendarRepository, SerializerInterface $serializer)
     {
-        $user = $this->security->getUser();
+        /*$user = $this->security->getUser();
         $id = $user->getId();
         $jsonData = $serializer->serialize($calendarRepository->findAllById($id), 'json', ['groups' => 'calendar_data']);
         return $this->render('calendar/index.html.twig', [
@@ -34,13 +35,14 @@ class CalendarController extends AbstractController
             'data' => $jsonData,
             'user' => $user,
         ]);
-    }
+    }*/
 
     /**
      * @Route("/new", name="calendar_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
+        $user = $this->security->getUser();
         $calendar = new Calendar();
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
@@ -56,6 +58,7 @@ class CalendarController extends AbstractController
         return $this->render('calendar/new.html.twig', [
             'calendar' => $calendar,
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 

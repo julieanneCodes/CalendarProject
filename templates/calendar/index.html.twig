@@ -5,35 +5,7 @@
     {{ include('user-header.html.twig') }}
     {{ include('search/searcher.html.twig') }}
     <h1>Calendar index</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Event Name</th>
-                <th>Time</th>
-                <th>Day</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for calendar in calendars %}
-            <tr>
-                <td>{{ calendar.eventname }}</td>
-                <td>{{ calendar.time ? calendar.time|date('H:i') : '' }}</td>
-                <td>{{ calendar.day ? calendar.day|date('d-m-Y') : '' }}</td>
-                <td>
-                    <a href="{{ path('calendar_show', {'id': calendar.id}) }}">show</a>
-                    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    
-    <a href="{{ path('calendar_new') }}">Create new</a>
+    <a href="{{ path('calendar_new') }}">Add new event</a>
     <a href="{{ path('task_index')}}">View tasks</a>
-    <calendar-component id="content" data="{{ data }}">
+    <calendar-component id="content" data="{{ data }}"></calendar-component>
 {% endblock %}
