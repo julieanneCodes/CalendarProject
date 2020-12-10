@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Repository\ViewConfigRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,7 +99,7 @@ class LoginFormAuthAuthenticator extends AbstractFormLoginAuthenticator implemen
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($this->urlGenerator->generate("calendar_index"));
+            return new RedirectResponse($this->urlGenerator->generate("app_login"));
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
