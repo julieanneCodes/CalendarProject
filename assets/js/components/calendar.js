@@ -8,6 +8,7 @@ const weekOfYear = require('dayjs/plugin/weekOfYear');
 
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
+
 class Calendar extends LitElement {
     static get styles() {
         return [calendarStyles]
@@ -22,8 +23,6 @@ class Calendar extends LitElement {
             daysNames: { type: Array },
             previousMDays: { type: Array },
             nextMDays: { type: Array },
-            aux: {type: Array }
-
         };
     }
 
@@ -35,7 +34,6 @@ class Calendar extends LitElement {
         this.months = [...months];
         this.daysNames = [...days];
         this.data = [];
-        this.aux = [];
         this.days = 0;
         this.currentMonth = '';
         this.currentDate = new Date();
@@ -107,38 +105,11 @@ class Calendar extends LitElement {
             }
           });
     }
-    eventNames() {
-       const divs = this.shadowRoot.querySelectorAll(".daysWrap");
-        const aux = [...divs];
-        //console.log(aux)
-       // const arr = []
-       // const events = []
-        // aux.map(item=> item.append(''));
-        /*aux.map(item => this.data.map(info => { 
-            if(parseInt(item.id) === new Date(info.day).getTime()) {
-               this.shadowRoot.getElementById(new Date(info.day).getTime().toString()).append(info.eventname);
-                
-               // arr.push(item)
-               // events.push(info)
-            } else {
-                return null;
-            }
-        }))
-        /*for(let i=0; i<arr.length;i++) {
-            arr[i].append(events[i].eventname)
+    
+    dateExists(item) {
 
-        }*/
-        console.log(this.data);
-        //console.log(aux);
-        for(let i=0;i<aux.length;i++) {
-            for(let x=0;x<this.data.length; x++) {
-                if(aux[i].id === (new Date(this.data[x].day).getTime()).toString()) {
-                    this.shadowRoot.getElementById(aux[i].id).append(this.data[x].eventname);
-                } else {
-                    null;
-                }
-            };
-        };
+        const events = this.data.filter(x => new Date(x.day).getTime() == item.timeDate);
+        return events.length > 0  ? events : [];
     }
 
     calendar(date) {
@@ -149,24 +120,21 @@ class Calendar extends LitElement {
 
         this.currentMonth = this.currentDate.getMonth();
         const arr = [...this.previousMDays, ...this.daysArray, ...this.nextMDays];
-        //const aux = this.eventNames(arr);
-        console.log(arr)
+
         return html`
             <div>${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
             <div class="calendarWrap">
                 ${this.daysNames.map(day => html`<div class="namesWrap">${day}</div>`)}
-               ${arr.map(item => html`<div class="daysWrap" id="${item.timeDate}">${item.dayOfMonth}</div>`)}
+               ${arr.map(item => html`<div class="daysWrap" id="${item.timeDate}">
+               ${item.dayOfMonth}
+               ${this.dateExists(item).map(x => html`${x.eventname}`)}
+               </div>`)}
             </div>
         `;
     }
     auxCalendar() {
         this.currentDate = new Date();
         this.calendar(this.currentDate);
-    }
-
-    async updated() {
-        await this.updateComplete;
-        this.eventNames(this.currentDate);
     }
 
     render() {
