@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
+use App\Repository\ViewConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,8 +41,10 @@ class CalendarController extends AbstractController
     /**
      * @Route("/new", name="calendar_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ViewConfigRepository $configRepo): Response
     {
+        $defaultView = $configRepo->findOneBy(['id' => 1]);
+        $singleView = $configRepo->findOneBy(['id' => 2]);
         $user = $this->security->getUser();
         $calendar = new Calendar();
         $form = $this->createForm(CalendarType::class, $calendar);
@@ -51,8 +54,11 @@ class CalendarController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($calendar);
             $entityManager->flush();
-
-            return $this->redirectToRoute('calendar_index');
+            if($user->getViewConfig() === $defaultView) {
+                return $this->redirectToRoute('double');
+            } else if($user->getViewConfig() === $singleView) {
+                return $this->redirectToRoute('single-calendar');
+            }
         }
 
         return $this->render('calendar/new.html.twig', [
