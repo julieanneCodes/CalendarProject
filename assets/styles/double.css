@@ -1,1 +1,20 @@
-.calendarWraper {}
+.wholeWrapper {
+  position: relative;
+  display: flex;
+}
+.calendarWraper {
+  position: relative;
+}
+.tasksWraper {
+  position: relative;
+  width: 30%;
+  padding-top: 30px;
+}
+.modalWrapper {
+  display: none;
+}
+.taskWrapper {
+  border: 1px solid black;
+  position: relative;
+  margin-top: 100px;
+}

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {LitElement, html} from 'lit-element';
+import { LitElement, html } from 'lit-element';
 import { calendarStyles } from '../css/calendar-styles';
 import { months, days } from '../utils/constants';
 
@@ -21,7 +21,8 @@ class Calendar extends LitElement {
             data: { type: Array },
             daysNames: { type: Array },
             previousMDays: { type: Array },
-            nextMDays: { type: Array }
+            nextMDays: { type: Array },
+            aux: {type: Array }
 
         };
     }
@@ -34,6 +35,7 @@ class Calendar extends LitElement {
         this.months = [...months];
         this.daysNames = [...days];
         this.data = [];
+        this.aux = [];
         this.days = 0;
         this.currentMonth = '';
         this.currentDate = new Date();
@@ -60,6 +62,7 @@ class Calendar extends LitElement {
         return [...Array(this.calendarDays(date))].map((day, index) => {
             return {
                 date: new Date(date.getFullYear(), date.getMonth(), index + 1),
+                timeDate: new Date(date.getFullYear(), date.getMonth(), index + 1).getTime(),
                 dayOfMonth: index + 1,
                 isCurrentMonth: true,
             };
@@ -79,7 +82,8 @@ class Calendar extends LitElement {
 
         return [...Array(previousMonthDaysN)].map((day, index) => {    
             return {
-              date: new Date(previousMonth.getFullYear(), previousMonth.getMonth() +1, previousMonthLastMonday + index ),
+              date: new Date(previousMonth.getFullYear(), previousMonth.getMonth(), previousMonthLastMonday + index ),
+              timeDate: new Date(previousMonth.getFullYear(), previousMonth.getMonth() +1, previousMonthLastMonday + index ).getTime(),
               dayOfMonth: previousMonthLastMonday + index,
               isCurrentMonth: false
             };
@@ -97,29 +101,61 @@ class Calendar extends LitElement {
         return [...Array(daysFromNextMonth)].map((day, index) => {
             return {
               date: new Date(date.getFullYear(), date.getMonth() +1, index + 1),
+              timeDate: new Date(date.getFullYear(), date.getMonth() +1, index + 1).getTime(),
               dayOfMonth: index + 1,
               isCurrentMonth: false
             }
           });
     }
+    eventNames() {
+       const divs = this.shadowRoot.querySelectorAll(".daysWrap");
+        const aux = [...divs];
+        //console.log(aux)
+       // const arr = []
+       // const events = []
+        // aux.map(item=> item.append(''));
+        /*aux.map(item => this.data.map(info => { 
+            if(parseInt(item.id) === new Date(info.day).getTime()) {
+               this.shadowRoot.getElementById(new Date(info.day).getTime().toString()).append(info.eventname);
+                
+               // arr.push(item)
+               // events.push(info)
+            } else {
+                return null;
+            }
+        }))
+        /*for(let i=0; i<arr.length;i++) {
+            arr[i].append(events[i].eventname)
+
+        }*/
+        console.log(this.data);
+        //console.log(aux);
+        for(let i=0;i<aux.length;i++) {
+            for(let x=0;x<this.data.length; x++) {
+                if(aux[i].id === (new Date(this.data[x].day).getTime()).toString()) {
+                    this.shadowRoot.getElementById(aux[i].id).append(this.data[x].eventname);
+                } else {
+                    null;
+                }
+            };
+        };
+    }
 
     calendar(date) {
         this.calendarDays(date);
-
         this.daysArray = this.currentMonthDays(date);
         this.previousMDays = this.previousMonthDays(date);
         this.nextMDays = this.nextMonthDays(date);
 
         this.currentMonth = this.currentDate.getMonth();
         const arr = [...this.previousMDays, ...this.daysArray, ...this.nextMDays];
-
+        //const aux = this.eventNames(arr);
+        console.log(arr)
         return html`
             <div>${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
             <div class="calendarWrap">
                 ${this.daysNames.map(day => html`<div class="namesWrap">${day}</div>`)}
-                ${arr.map((day,i)=> html`
-                <div class="daysWrap">${day.date.getDate()}</div>
-                `)}
+               ${arr.map(item => html`<div class="daysWrap" id="${item.timeDate}">${item.dayOfMonth}</div>`)}
             </div>
         `;
     }
@@ -128,9 +164,14 @@ class Calendar extends LitElement {
         this.calendar(this.currentDate);
     }
 
+    async updated() {
+        await this.updateComplete;
+        this.eventNames(this.currentDate);
+    }
+
     render() {
         return html`
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <div class="stepperWrap">
                 <button id="monthBefore" class="material-icons" @click="${this.stepper}">
                     keyboard_arrow_left
