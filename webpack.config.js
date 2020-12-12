@@ -27,6 +27,8 @@ Encore
     .addEntry('func', './assets/js/functions.js')
     .addEntry('burger-menu', './assets/js/burger-menu.js')
     .addEntry('calendar','./assets/js/components/calendar.js')
+    .addEntry('modal', './assets/js/components/modal.js')
+    .addEntry('calendarView', './assets/js/view/calendar-view.js')
     .addEntry('config', './assets/styles/config.css')
     .addEntry('customized', './assets/styles/customized.css')
     .addEntry('double', './assets/styles/double.css')
