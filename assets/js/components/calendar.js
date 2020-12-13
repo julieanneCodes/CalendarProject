@@ -35,8 +35,8 @@ class Calendar extends LitElement {
         this.daysNames = [...days];
         this.data = [];
         this.days = 0;
-        this.currentMonth = '';
         this.currentDate = new Date();
+        this.currentMonth = this.currentDate.getMonth();
     }
 
     stepper(e){
@@ -60,7 +60,6 @@ class Calendar extends LitElement {
         return [...Array(this.calendarDays(date))].map((day, index) => {
             return {
                 date: new Date(date.getFullYear(), date.getMonth(), index + 1),
-                timeDate: new Date(date.getFullYear(), date.getMonth(), index + 1).getTime(),
                 dayOfMonth: index + 1,
                 isCurrentMonth: true,
             };
@@ -81,7 +80,6 @@ class Calendar extends LitElement {
         return [...Array(previousMonthDaysN)].map((day, index) => {    
             return {
               date: new Date(previousMonth.getFullYear(), previousMonth.getMonth(), previousMonthLastMonday + index ),
-              timeDate: new Date(previousMonth.getFullYear(), previousMonth.getMonth() +1, previousMonthLastMonday + index ).getTime(),
               dayOfMonth: previousMonthLastMonday + index,
               isCurrentMonth: false
             };
@@ -99,7 +97,6 @@ class Calendar extends LitElement {
         return [...Array(daysFromNextMonth)].map((day, index) => {
             return {
               date: new Date(date.getFullYear(), date.getMonth() +1, index + 1),
-              timeDate: new Date(date.getFullYear(), date.getMonth() +1, index + 1).getTime(),
               dayOfMonth: index + 1,
               isCurrentMonth: false
             }
@@ -108,30 +105,32 @@ class Calendar extends LitElement {
     
     dateExists(item) {
 
-        const events = this.data.filter(x => new Date(x.day).getTime() == item.timeDate);
+        const events = this.data.filter(x => new Date(x.day).getTime() == item.date.getTime());
         return events.length > 0  ? events : [];
     }
 
     calendar(date) {
-        this.calendarDays(date);
         this.daysArray = this.currentMonthDays(date);
         this.previousMDays = this.previousMonthDays(date);
         this.nextMDays = this.nextMonthDays(date);
 
-        this.currentMonth = this.currentDate.getMonth();
         const arr = [...this.previousMDays, ...this.daysArray, ...this.nextMDays];
-
         return html`
-            <div>${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
+            <div class="mth-wrp">${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
             <div class="calendarWrap">
                 ${this.daysNames.map(day => html`<div class="namesWrap">${day}</div>`)}
-               ${arr.map(item => html`<div class="daysWrap" id="${item.timeDate}">
-               ${item.dayOfMonth}
-               ${this.dateExists(item).map(x => html`${x.eventname}`)}
-               </div>`)}
+               ${arr.map(item => html`
+                    <div class="daysWrap" id="">
+                        ${item.dayOfMonth}
+                        ${this.dateExists(item).map(x => 
+                            html`<div class="eventWrap" @click="${this.openModal}">${x.eventname || x.taskname}</div>
+                        `)}
+                    </div>
+                `)}
             </div>
         `;
     }
+
     auxCalendar() {
         this.currentDate = new Date();
         this.calendar(this.currentDate);
@@ -140,17 +139,18 @@ class Calendar extends LitElement {
     render() {
         return html`
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <div class="stepperWrap">
-                <button id="monthBefore" class="material-icons" @click="${this.stepper}">
-                    keyboard_arrow_left
-                </button>
-                <button id="monthAfter" class="material-icons" @click="${this.stepper}">
-                    keyboard_arrow_right
-                </button>
-                <button @click="${this.auxCalendar}">Back to current month</button>
+            <div class="stp-container">
+                <div class="stepperWrap">
+                    <button id="monthBefore" class="material-icons btn-s" @click="${this.stepper}">
+                        keyboard_arrow_left
+                    </button>
+                    <button @click="${this.auxCalendar}" class="btn-sm">Back to ${months[this.currentMonth]}</button>
+                    <button id="monthAfter" class="material-icons btn-s" @click="${this.stepper}">
+                        keyboard_arrow_right
+                    </button>
+                </div>
             </div>
             ${this.calendar(this.currentDate)}`;
     }
 }
-
 customElements.define('calendar-component', Calendar);
