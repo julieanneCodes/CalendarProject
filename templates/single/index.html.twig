@@ -1,3 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bethink{% endblock %}
 {% block body %}
-    {{ include('calendar/index.html.twig') }}
+    {{ include('user-header.html.twig') }}
+    {{ include('search/searcher.html.twig') }}
+    <h1>Calendar index</h1>
+    <a href="{{ path('calendar_new') }}">Add new event</a>
+    <a href="{{ path(route) }}">{{ routeName }}</a>
+    <calendar-component id="content" data="{{ data }}"></calendar-component>
 {% endblock %}
