@@ -22,21 +22,6 @@ class CalendarController extends AbstractController
     {
         $this->security= $security;
     }
-    /**
-     * @Route("/", name="calendar_index", methods={"GET"})
-     */
-    /*
-    public function index(CalendarRepository $calendarRepository, SerializerInterface $serializer)
-    {
-        /*$user = $this->security->getUser();
-        $id = $user->getId();
-        $jsonData = $serializer->serialize($calendarRepository->findAllById($id), 'json', ['groups' => 'calendar_data']);
-        return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findAllById($id),
-            'data' => $jsonData,
-            'user' => $user,
-        ]);
-    }*/
 
     /**
      * @Route("/new", name="calendar_new", methods={"GET","POST"})
