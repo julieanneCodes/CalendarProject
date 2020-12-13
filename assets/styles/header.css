@@ -7,15 +7,18 @@
   align-items: center;
 }
 .btnSignIn {
-  border: 1px solid black;
-  height: 30px;
-  width: 65px;
   position: absolute;
-  right: 0px;
-  top: 30px;
-  text-align: center;
-  padding-top: 3px;
+  right: 15px;
+}
+.btn-sign {
+  width: 120px;
+  height: 50px;
+  background-color: #5F8FB4;
+  color: whitesmoke;
   border-radius: 5px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
 }
 .leaf, .user, .menu {
   font-size: 40px;
@@ -29,7 +32,9 @@
   cursor: pointer;
 }
 .burgerMenu {
-  position: relative;
+  position: absolute;
+  right: 40px;
+  top: 30px;
 }
 .userWrap {
   position: relative;
@@ -65,25 +70,17 @@
   right: 45px;
   font-size: 60px;
 }
-
-@media (min-width: 768px) {
-  .btnSignIn {
-    width: 70px;
-    right: 15px;
-  }
-  .pseudoHeader {
-    margin-top: 10px;
-  }
-  .home {
+.home {
     left: 15px;
     position: relative;
-  }
-  .leaf {
+}
+.leaf {
     left: 20px;
     position: relative;
-  }
 }
 
-@media (min-width: 1024px) {
-  
+.title {
+  color: #256BA2;
+  margin-left: 15px;
 }
+

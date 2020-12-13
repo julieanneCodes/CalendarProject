@@ -1,12 +1,26 @@
 .searcherB {
-  border-color:  #5F8FB4;
+  border: none;
   background-color:  #5F8FB4;
   border-radius: 5px;
+  cursor: pointer;
+  height: 35px;
+  width: 50px;
 }
 .glass {
   color: whitesmoke;
 }
 .searcher {
-  position: relative;
+  position: absolute;
+  right: 60px;
+  display: flex;
   align-items: center;
+}
+.btn-wrp {
+  margin-left: 10px;
+}
+.npt-wrp {
+  height: 35px;
+}
+.npt-wrp input {
+  height: inherit;
 }
