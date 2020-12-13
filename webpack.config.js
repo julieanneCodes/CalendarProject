@@ -23,11 +23,9 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.js')
     .addEntry('func', './assets/js/functions.js')
+    .addEntry('loginFunctions', './assets/js/functions/login-functions.js')
     .addEntry('burger-menu', './assets/js/burger-menu.js')
-    .addEntry('calendar','./assets/js/components/calendar.js')
-    .addEntry('modal', './assets/js/components/modal.js')
     .addEntry('calendarView', './assets/js/view/calendar-view.js')
     .addEntry('config', './assets/styles/config.css')
     .addEntry('customized', './assets/styles/customized.css')
