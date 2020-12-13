@@ -6,28 +6,10 @@
 {% block body %}
     {{ include('user-header.html.twig') }}
     {{ include('search/searcher.html.twig') }}
-    <h1>Calendar & Tasks</h1>
-    <div class="wholeWrapper">
-        <div class="calendarWraper">
-            <a href="{{ path('calendar_new') }}">Add new event</a>
-            <calendar-component id="content" data="{{ data }}"></calendar-component>
-        </div>
-        <!-- <calendar-view calendarData="{{ data }}"></calendar-view> -->
-        <div class="tasksWraper">
-                {% for task in tasks %}
-                    <div class="taskWrapper">
-                        <div>{{ task.day ? task.day|date('d-m-Y') : '' }}</div>
-                        <div>{{ task.taskName }}</div>
-                    </div>
-                {% else %}
-                    <div>
-                        <div>no records found</div>
-                    </div>
-                {% endfor %}
-            <a href="{{ path('task_new') }}">Add new task</a>
-        </div>
-        <div class="modalWrapper">
-            <modal-window></modal-window>
-        </div>
-    </div>
+    <h1 class="title">Calendar & Tasks</h1>
+    <a href="{{ path('calendar_new') }}">Add new event</a>
+    <calendar-view id="content" calendarData="{{ data }}" tasksData="{{ taskData }}"></calendar-view>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('cModalFunc') }}
 {% endblock %}

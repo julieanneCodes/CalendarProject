@@ -6,7 +6,10 @@
             <a href="{{ path('home') }}" class="home"><h1>Bethink</h1></a>
             <span class="material-icons leaf">eco</span>
             <div class="btnSignIn">
-                <a href="{{ path('app_login') }}">Sign in</a>
+                <button type="submit" class="btn-sign" id="sbtn">Sign in</button>
             </div>
         </div>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('loginFunctions') }}
 {% endblock %}
