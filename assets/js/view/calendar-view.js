@@ -1,24 +1,36 @@
+import dayjs from 'dayjs';
 import { LitElement, html } from 'lit-element';
-import '../components/calendar.js';
-import '../components/modal.js';
+import { doubleStyles } from '../css/double-styles';
+import '../components/calendar';
+import '../components/tasks';
+
 class CalendarView extends LitElement {
+
+  static get styles() {
+    return [ doubleStyles ]
+  }
   static get properties() {
     return {
-      calendarData: { type: Array }
-    };
+      calendarData: { type: Array },
+      tasksData: { type: Array },
+    }
   }
-
   constructor() {
     super();
     this.calendarData = [];
+    this.tasksData = [];
   }
-
   render() {
     return html`
-      <calendar-component .data="${this.calendarData}"></calendar-component>
-      <modal-window></modal-window>
+      <div class="wholeWrapper">
+        <div class="calendarWrapper">
+          <calendar-component .data="${this.calendarData}"></calendar-component>
+        </div>
+        <div class="tasksWrapper">
+          <task-component .data="${this.tasksData}"></task-component>
+        </div>
+      </div>
     `;
   }
 }
-
 customElements.define('calendar-view', CalendarView);
