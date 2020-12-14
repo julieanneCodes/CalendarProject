@@ -4,7 +4,7 @@ class Tasks extends LitElement {
   static get styles() {
     return css`
       .tasksWrapper {
-        margin-top: 87px;
+        margin: 87px 0px 0px 10px;
       }
       .tsk-item {
         background-color: #5F8FB4;

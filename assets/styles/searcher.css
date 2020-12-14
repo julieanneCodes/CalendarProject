@@ -3,15 +3,18 @@
   background-color:  #5F8FB4;
   border-radius: 5px;
   cursor: pointer;
-  height: 35px;
-  width: 50px;
+  height: 30px;
+  width: 40px;
+}
+.searcherB:focus {
+  outline: none;
 }
 .glass {
   color: whitesmoke;
 }
 .searcher {
   position: absolute;
-  right: 60px;
+  right: 20px;
   display: flex;
   align-items: center;
 }
@@ -19,8 +22,10 @@
   margin-left: 10px;
 }
 .npt-wrp {
-  height: 35px;
+  height: 30px;
 }
 .npt-wrp input {
   height: inherit;
+  border: 2px solid #256BA2;
+  border-radius: 5px;
 }

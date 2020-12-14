@@ -25,7 +25,7 @@ class CalendarRepository extends ServiceEntityRepository
     public function findByField($value)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.event_name = :val')
+            ->andWhere('c.eventname = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getResult();

@@ -1,21 +1,22 @@
 import { css } from 'lit-element';
 export const calendarStyles = css`
   .calendarWrap {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   margin-top: 40px;
   }
   .namesWrap {
     border: none;
-    text-align: center;
     height: unset;
-    flex: 1 0 calc(14% - 10px);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
   }
-  .calendarWrap .daysWrap {
-  flex: 1 0 calc(14% - 10px);
-  margin: 5px;
-  height: 100px;
-  border: 1px solid black;
+  .daysWrap {
+  height: 75px;
+  position: relative;
+  }
+  .daysWrap {
+    border: 1px solid #256BA2;
   }
   .mth-wrp {
     font-size: 20px;
@@ -35,14 +36,21 @@ export const calendarStyles = css`
     background-color: #256BA2;
     color: whitesmoke;
     border-radius: 5px;
-    height: 35px;
-    width: 50px;
+    height: 30px;
+    width: 40px;
+  }
+  .btn-s:focus {
+    outline: none;
   }
   .btn-sm {
-    height: 35px;
+    height: 30px;
     background-color: #5F8FB4;
     color: whitesmoke;
     border: none;
     border-radius: 5px;
+    margin: 0px 5px;
+  }
+  .btn-sm:focus {
+    outline: none;
   }
 `;
