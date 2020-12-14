@@ -37,7 +37,7 @@ class Calendar extends LitElement {
         this.data = [];
         this.days = 0;
         this.currentDate = new Date();
-        this.currentMonth = this.currentDate.getMonth();
+        this.currentMonth = '';
     }
 
     stepper(e){
@@ -114,7 +114,7 @@ class Calendar extends LitElement {
         this.daysArray = this.currentMonthDays(date);
         this.previousMDays = this.previousMonthDays(date);
         this.nextMDays = this.nextMonthDays(date);
-
+        this.currentMonth = this.currentDate.getMonth();
         const arr = [...this.previousMDays, ...this.daysArray, ...this.nextMDays];
         return html`
             <div class="mth-wrp">${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
@@ -145,7 +145,7 @@ class Calendar extends LitElement {
                     <button id="monthBefore" class="material-icons btn-s" @click="${this.stepper}">
                         keyboard_arrow_left
                     </button>
-                    <button @click="${this.auxCalendar}" class="btn-sm">Back to ${months[this.currentMonth]}</button>
+                    <button @click="${this.auxCalendar}" class="btn-sm">Back to ${dateFormatter(new Date()).monthName}</button>
                     <button id="monthAfter" class="material-icons btn-s" @click="${this.stepper}">
                         keyboard_arrow_right
                     </button>
