@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { LitElement, html } from 'lit-element';
 import { calendarStyles } from '../css/calendar-styles';
 import { months, days } from '../utils/constants';
+import { dateFormatter } from '../utils/functions';
 
 const weekday = require('dayjs/plugin/weekday');
 const weekOfYear = require('dayjs/plugin/weekOfYear');
@@ -105,7 +106,7 @@ class Calendar extends LitElement {
     
     dateExists(item) {
 
-        const events = this.data.filter(x => new Date(x.day).getTime() == item.date.getTime());
+        const events = this.data.filter(x => dateFormatter(x.day).databased == item.date.getTime());
         return events.length > 0  ? events : [];
     }
 
