@@ -4,16 +4,17 @@ class Tasks extends LitElement {
   static get styles() {
     return css`
       .tasksWrapper {
-        margin: 87px 0px 0px 10px;
+        margin: 44px 0px 0px 10px;
       }
       .tsk-item {
         background-color: #5F8FB4;
         color: whitesmoke;
         margin-bottom: 5px;
         padding: 10px;
+        cursor: pointer;
       }
-      .tsk-item div {
-        font-size: 20px;
+      .dateWrap {
+        font-size: 18px;
       }
 
     `;

@@ -24,6 +24,8 @@ class Calendar extends LitElement {
             daysNames: { type: Array },
             previousMDays: { type: Array },
             nextMDays: { type: Array },
+            calendarPadding: { type: String },
+            titlePadding: { type: String },
         };
     }
 
@@ -38,6 +40,8 @@ class Calendar extends LitElement {
         this.days = 0;
         this.currentDate = new Date();
         this.currentMonth = '';
+        this.calendarPadding = '';
+        this.titlePadding = '';
     }
 
     stepper(e){
@@ -110,6 +114,13 @@ class Calendar extends LitElement {
         return events.length > 0  ? events : [];
     }
 
+    openModal(item) {
+        const event = new CustomEvent('modal-open', {
+            detail: [item],
+        });
+        this.dispatchEvent(event);
+    }
+
     calendar(date) {
         this.daysArray = this.currentMonthDays(date);
         this.previousMDays = this.previousMonthDays(date);
@@ -124,7 +135,7 @@ class Calendar extends LitElement {
                     <div class="daysWrap" id="">
                         ${item.dayOfMonth}
                         ${this.dateExists(item).map(x => 
-                            html`<div class="eventWrap" @click="${this.openModal}">${x.eventname || x.taskname}</div>
+                            html`<div class="eventWrap" @click="${ () => this.openModal(x)}">${x.eventname || x.taskname}</div>
                         `)}
                     </div>
                 `)}
@@ -136,20 +147,24 @@ class Calendar extends LitElement {
         this.currentDate = new Date();
         this.calendar(this.currentDate);
     }
-
+    async firstUpdated() {
+        await this.updateComplete;
+        const title = this.shadowRoot.querySelector('.mth-wrp');
+        const calendar = this.shadowRoot.querySelector('.calendarWrap');
+        title.style.paddingLeft = this.titlePadding;
+        calendar.style.padding = this.calendarPadding;
+    }
     render() {
         return html`
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <div class="stp-container">
-                <div class="stepperWrap">
-                    <button id="monthBefore" class="material-icons btn-s" @click="${this.stepper}">
-                        keyboard_arrow_left
-                    </button>
-                    <button @click="${this.auxCalendar}" class="btn-sm">Back to ${dateFormatter(new Date()).monthName}</button>
-                    <button id="monthAfter" class="material-icons btn-s" @click="${this.stepper}">
-                        keyboard_arrow_right
-                    </button>
-                </div>
+            <div class="stepperWrap">
+                <button id="monthBefore" class="material-icons btn-s" @click="${this.stepper}">
+                    keyboard_arrow_left
+                </button>
+                <button @click="${this.auxCalendar}" class="btn-sm">Back to ${dateFormatter(new Date()).monthName}</button>
+                <button id="monthAfter" class="material-icons btn-s" @click="${this.stepper}">
+                    keyboard_arrow_right
+                </button>
             </div>
             ${this.calendar(this.currentDate)}`;
     }
