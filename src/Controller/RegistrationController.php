@@ -38,7 +38,7 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 'main'
             );
-            return $this->redirectToRoute('calendar_index');
+            return $this->redirectToRoute('double');
         }
         return $this->render('registration/new.html.twig', 
             array('form' => $form->createView())

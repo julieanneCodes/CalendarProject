@@ -13,7 +13,7 @@ class SignUpType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ['class' => 'emailInput']
+                'attr' => ['class' => 'emailInput', 'placeholder' => 'Email']
             ])
         ;
     }

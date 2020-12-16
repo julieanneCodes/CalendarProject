@@ -19,7 +19,7 @@ class SingleController extends AbstractController
         $this->security= $security;
     }
     /**
-     * @Route("/single/calendar", name="single_calendar")
+     * @Route("/single", name="single_calendar")
      */
     public function index(CalendarRepository $calendarRepository, SerializerInterface $serializer): Response
     {
@@ -30,8 +30,11 @@ class SingleController extends AbstractController
         return $this->render('single/index.html.twig', [
             'data' => $jsonData,
             'user' => $user,
+            'userId' => $id,
             'route' => 'single_tasks',
-            'routeName' => 'view tasks'
+            'routeName' => 'view tasks',
+            'padding' => '0px 30px 0px 30px',
+            'titlePadding' => '30px',
         ]);
     }
     /**

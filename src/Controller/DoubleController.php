@@ -28,6 +28,7 @@ class DoubleController extends AbstractController
         $tasksData = $serializer->serialize($taskRepository->findAllById($id), 'json', ['groups' => 'tasks_data']);
         return $this->render('double/index.html.twig', [
             'data' => $calendarData,
+            'userId' => $id,
             'taskData' => $tasksData,
             'user' => $user,
             'tasks' => $taskRepository->findAllById($id)

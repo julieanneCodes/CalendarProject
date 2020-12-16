@@ -22,18 +22,17 @@ class UserType extends AbstractType
         $email = isset($_GET['email']) ? $_GET['email'] : '';
         $builder
             ->add('email', EmailType::class, [
-                'data' => $email
+                'data' => $email,
+                'attr' => ['placeholder' => 'Email'],
             ])
-            ->add('name', TextType::class)
+            ->add('name', TextType::class, [
+                'attr' => ['placeholder' => 'Name']
+            ])
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options' => array('attr' => ['placeholder' => 'Password']),
+                'second_options' => array('attr' => ['placeholder' => 'Repeat Password']),
             ))
-            ->add('viewConfig', EntityType::class, [
-                'class' => ViewConfig::class,
-                'choice_label' => 'panel_name',
-            ])
         ;
     }
 

@@ -23,8 +23,9 @@ class CalendarType extends AbstractType
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        date_default_timezone_set("Europe/Madrid");
         $currentDate = date('Y-m-d');
-        $currentTime = date('H:i', strtotime('+1 Hour'));
+        $currentTime = date('H:i', strtotime('+1 hour'));
         $builder
             ->add('event_name')
             ->add('time', TimeType::class, [
