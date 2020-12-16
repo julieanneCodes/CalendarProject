@@ -1,12 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Bethink | Calendar & Tasks{% endblock %}
 {% block body %}
-    {{ include('user-header.html.twig') }}
     {{ include('search/searcher.html.twig') }}
-    <h1 class="title">Calendar & Tasks</h1>
-    <a href="{{ path('calendar_new') }}">Add new event</a>
-    <calendar-view id="content" calendarData="{{ data }}" tasksData="{{ taskData }}"></calendar-view>
-{% endblock %}
-{% block javascripts %}
-    {{ encore_entry_script_tags('cModalFunc') }}
+    <calendar-view id="content" calendarData="{{ data }}" tasksData="{{ taskData }}" userId ="{{ userId }}"></calendar-view>
 {% endblock %}

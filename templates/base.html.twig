@@ -4,10 +4,16 @@
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <style type="text/css">
             * {
                 box-sizing: border-box;
+            }
+            body {
+                margin: unset;
             }
         </style>
         {{ encore_entry_script_tags('calendarView') }}

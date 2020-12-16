@@ -3,7 +3,6 @@ export const calendarStyles = css`
   .calendarWrap {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  margin-top: 40px;
   }
   .namesWrap {
     border: none;
@@ -12,32 +11,38 @@ export const calendarStyles = css`
     grid-template-columns: repeat(7, 1fr);
   }
   .daysWrap {
-  height: 75px;
+  height: 70px;
   position: relative;
+  padding: 5px 5px 0px 5px;
+  border: 1px solid #D9D9D6;
+  overflow-y: hidden;
   }
-  .daysWrap {
-    border: 1px solid #256BA2;
+  .eventWrap {
+    color: whitesmoke;
+    background-color: #5F8FB4;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 4px 0px 4px 4px;
   }
   .mth-wrp {
     font-size: 20px;
     color: #256BA2;
   }
-  .stp-container {
-    position: relative;
-  }
   .stepperWrap {
     position: absolute;
-    right: 5px;
+    right: 320px;
+    top: 30px;
     display: inline-flex;
     align-items: center;
   }
   .btn-s {
     border: none;
-    background-color: #256BA2;
-    color: whitesmoke;
+    color: #256BA2;
+    background-color: transparent;
     border-radius: 5px;
     height: 30px;
     width: 40px;
+    cursor: pointer;
   }
   .btn-s:focus {
     outline: none;
@@ -49,6 +54,7 @@ export const calendarStyles = css`
     border: none;
     border-radius: 5px;
     margin: 0px 5px;
+    cursor: pointer;
   }
   .btn-sm:focus {
     outline: none;

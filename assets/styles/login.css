@@ -1,33 +1,46 @@
-.container {
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.loginForm {
   position: relative;
-}
-.loginEmail, .loginPasswd {
-  margin: 20px 0px;
-  width: 100%;
-}
-.btnWrap {
-  width: 80%;
-  height: 40px;
+  width: 50%;
   margin: auto;
-  margin-top: 10px;
+}
+.lgn-cnt {
+  display: grid;
+  position: relative;
+  width: 50%;
+  margin: auto;
+}
+.lbl {
+  display: none;
+}
+.hi, .btn {
+  font-family: 'Roboto', sans-serif;
+}
+.hi {
+  color: #041E42;
 }
 .btn {
   width: 100%;
-  height: inherit;
-  margin: auto;
+  height: 30px;
+  margin-top: 15px;
+  color: whitesmoke;
+  background-color: #5F8FB4;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
 }
-.loginForm {
-  width: 85%;
-  margin: auto;
-  margin-top: 40px;
+input[type = "password"] {
+  margin-top: 15px;
 }
-.lbl {
-  width: 100%;
-  display: inline-block;
+input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #D9D9D6;
 }
-.title {
-  width: 100%;
-  margin: auto;
+input:focus {
+  outline: none;
 }
 .btnSignIn {
   display: none;

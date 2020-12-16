@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 .home {
   text-decoration: none;
   font-family: 'Lobster', cursive;
@@ -29,70 +28,10 @@
 .btn-sign:focus {
   outline: none;
 }
-.leaf, .user, .menu {
+.leaf {
   font-size: 35px;
 }
-.home, .leaf, .user, .menu {
+.home, .leaf {
   color: #5F8FB4;
-}
-.burger {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-.burger:focus {
-  outline: none;
-}
-.burgerMenu {
-  position: absolute;
-  right: 6px;
-  top: 30px;
-}
-.userWrap {
   position: relative;
 }
-.sidepanel {
-  height: 0%;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #5F8FB4;
-  overflow-y: hidden;
-  transition: 0.5s;
-}
-.overlay-content {
-  position: relative;
-  top: 25%;
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-}
-.sidepanel a {
-  padding: 8px;
-  text-decoration: none;
-  color: whitesmoke;
-  display: block;
-  transition: 0.3s;
-}
-.sidepanel .closebtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
-}
-.home {
-    position: relative;
-}
-.leaf {
-    position: relative;
-}
-
-.title {
-  color: #256BA2;
-  margin-left: 15px;
-  font-family: 'Libre Baskerville', serif;
-  font-size: 20px;
-}
-

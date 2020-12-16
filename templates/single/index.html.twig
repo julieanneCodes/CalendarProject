@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ encore_entry_link_tags('single') }}
+{% endblock %}
 {% block title %}Bethink{% endblock %}
 {% block body %}
-    {{ include('user-header.html.twig') }}
+    <user-header usId="{{ userId }}"></user-header>
     {{ include('search/searcher.html.twig') }}
-    <h1>Calendar index</h1>
     <a href="{{ path('calendar_new') }}">Add new event</a>
     <a href="{{ path(route) }}">{{ routeName }}</a>
-    <calendar-component id="content" data="{{ data }}"></calendar-component>
+    <calendar-component id="content" data="{{ data }}" titlePadding="{{ titlePadding }}" calendarPadding="{{ padding }}"></calendar-component>
 {% endblock %}
