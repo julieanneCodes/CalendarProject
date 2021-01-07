@@ -26,20 +26,38 @@ class CalendarType extends AbstractType
         date_default_timezone_set("Europe/Madrid");
         $currentDate = date('Y-m-d');
         $currentTime = date('H:i', strtotime('+1 hour'));
+        $currentPlusTime = date('H:i', strtotime('+2 hour'));
         $builder
             ->add('event_name')
-            ->add('time', TimeType::class, [
-                'widget' => 'single_text',
-                'attr' => [
-                  'value' => $currentTime
-                ]
-            ])
             ->add('day', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'Start date ',
                 'attr' => [
                     'min' => $currentDate, 
                     'value' => $currentDate
                 ],
+            ])
+            ->add('time', TimeType::class, [
+                'widget' => 'single_text',
+                'label' => 'Start time ',
+                'attr' => [
+                  'value' => $currentTime
+                ]
+            ])
+            ->add('secondday', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'End date ',
+                'attr' => [
+                    'min' => $currentDate, 
+                    'value' => $currentDate
+                ],
+            ])
+            ->add('secondtime', TimeType::class, [
+                'label' => 'End time ',
+                'widget' => 'single_text',
+                'attr' => [
+                  'value' => $currentPlusTime
+                ]
             ])
             ->add('user', HiddenIdType::class)
             ->add('notes');
