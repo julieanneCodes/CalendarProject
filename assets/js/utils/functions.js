@@ -1,6 +1,9 @@
 import { months, completeDays } from './constants';
 
 export const dateFormatter = (date_) => {
+  if (typeof date_ == "undefined" ) {
+    return "";
+  } else {
   const date = new Date(date_);
 
   const monthDay = date.getDate();
@@ -14,12 +17,12 @@ export const dateFormatter = (date_) => {
   return {
     default: monthName + ' ' + monthDay + ', ' + year,
     databased: new Date(year, month, monthDay).getTime(),
-    short: monthName.slice(0, 3) + ' ' + monthDay,
     display: weekDayName + ', ' + monthDay + ' of ' + monthName + ' ' + year,
     monthName: monthName,
-    hour: (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute) + ' h',
+    hour: (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute) + ' h -',
     input: `${date.getFullYear()}-${date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${
       date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
     }`,
   };
+}
 };

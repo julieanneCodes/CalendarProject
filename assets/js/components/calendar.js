@@ -25,7 +25,7 @@ class Calendar extends LitElement {
             previousMDays: { type: Array },
             nextMDays: { type: Array },
             calendarPadding: { type: String },
-            titlePadding: { type: String },
+            more: { type: Object }
         };
     }
 
@@ -41,7 +41,7 @@ class Calendar extends LitElement {
         this.currentDate = new Date();
         this.currentMonth = '';
         this.calendarPadding = '';
-        this.titlePadding = '';
+        this.more = {};
     }
 
     stepper(e){
@@ -109,14 +109,20 @@ class Calendar extends LitElement {
     }
     
     dateExists(item) {
-
-        const events = this.data.filter(x => dateFormatter(x.day).databased == item.date.getTime());
+        let events = this.data.filter(x => dateFormatter(x.day).databased == item.date.getTime() || (dateFormatter(x.secondday).databased >= item.date.getTime() && dateFormatter(x.day).databased <= item.date.getTime() ));
+        if(events.length >=3){
+            this.more = {
+                eventsLength: events.length - 1 + " more",
+                moreEvents: [...events],
+            };
+            events = [events[0], this.more];
+        }
         return events.length > 0  ? events : [];
     }
 
     openModal(item) {
         const event = new CustomEvent('modal-open', {
-            detail: [item],
+            detail: item
         });
         this.dispatchEvent(event);
     }
@@ -128,14 +134,12 @@ class Calendar extends LitElement {
         this.currentMonth = this.currentDate.getMonth();
         const arr = [...this.previousMDays, ...this.daysArray, ...this.nextMDays];
         return html`
-            <div class="mth-wrp">${months[this.currentMonth]} ${this.currentDate.getFullYear()}</div>
-            <div class="calendarWrap">
-                ${this.daysNames.map(day => html`<div class="namesWrap">${day}</div>`)}
+           <div class="calendarWrap">
                ${arr.map(item => html`
                     <div class="daysWrap" id="">
                         ${item.dayOfMonth}
                         ${this.dateExists(item).map(x => 
-                            html`<div class="eventWrap" @click="${ () => this.openModal(x)}">${x.eventname || x.taskname}</div>
+                            html`<div class="eventWrap" @click="${ () => this.openModal(x)}">${(x.eventname || x.eventsLength ) || x.taskname }</div>
                         `)}
                     </div>
                 `)}
@@ -149,9 +153,7 @@ class Calendar extends LitElement {
     }
     async firstUpdated() {
         await this.updateComplete;
-        const title = this.shadowRoot.querySelector('.mth-wrp');
         const calendar = this.shadowRoot.querySelector('.calendarWrap');
-        title.style.paddingLeft = this.titlePadding;
         calendar.style.padding = this.calendarPadding;
     }
     render() {
