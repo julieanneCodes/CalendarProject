@@ -37,7 +37,7 @@ class CalendarRepository extends ServiceEntityRepository
             ->andWhere('c.user = :val')
             ->setParameter('val', $id)
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
     /*
     public function findOneBySomeField($value): ?Calendar
