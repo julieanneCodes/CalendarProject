@@ -1,0 +1,51 @@
+.stg-frm {
+  width: 60%;
+  margin: auto;
+}
+.frm-wrp {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid #D9D9D6;
+}
+input {
+  border: 1px solid #D9D9D6;
+  border-radius: 5px;
+  height: 30px;
+  padding: 5px;
+  margin: 0px 0px 15px 15px;
+}
+input:focus, select:focus {
+  outline: none;
+}
+select {
+  border: 1px solid #D9D9D6;
+  border-radius: 5px;
+  height: 30px;
+  margin-left: 15px;
+}
+.options {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  border-right: 1px solid #D9D9D6;
+  padding: 30px;
+}
+.btn {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  color: whitesmoke;
+  background-color: #5F8FB4;
+}
+.btn:focus {
+  outline: none;
+}
+.btn-sbmt {
+  margin-top: 50px;
+}
+.form {
+  padding: 30px;
+}
+.delete {
+  grid-column-start: 2;
+  padding: 0px 30px 30px 220px;
+}

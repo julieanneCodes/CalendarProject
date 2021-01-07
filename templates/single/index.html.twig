@@ -4,9 +4,9 @@
 {% endblock %}
 {% block title %}Bethink{% endblock %}
 {% block body %}
-    <user-header usId="{{ userId }}"></user-header>
+    <user-header></user-header>
     {{ include('search/searcher.html.twig') }}
     <a href="{{ path('calendar_new') }}">Add new event</a>
     <a href="{{ path(route) }}">{{ routeName }}</a>
-    <calendar-component id="content" data="{{ data }}" titlePadding="{{ titlePadding }}" calendarPadding="{{ padding }}"></calendar-component>
+    <calendar-component id="content" data="{{ data }}"></calendar-component>
 {% endblock %}

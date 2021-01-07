@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
+import { nothing } from 'lit-html';
 import { dateFormatter } from '../utils/functions';
 class CalendarModal extends LitElement {
   static get styles() {
@@ -78,18 +79,15 @@ class CalendarModal extends LitElement {
             <div class="event-info">
               <div>
                 <div>Event name:</div>
-                <div class="item">${item.eventname}</div>
+                <div class="item">${item.eventname || item.moreEvents.map(x => html`<div>${x.eventname}</div>`)}</div>
               </div>
               <div>
-                <div>Date:</div>
-                <div class="item">${dateFormatter(item.day).display}</div>
-              </div>
-              <div>
-                <div>Time:</div>
-                <div class="item">${dateFormatter(item.time).hour}</div>
-              </div>
-              <div>
-                <div>Notes:</div>
+                <div class="item">
+                  ${dateFormatter(item.day).display}
+                  ${dateFormatter(item.time).hour}
+                  ${dateFormatter(item.secondday).display}
+                  ${dateFormatter(item.secondtime).hour}
+                </div>
                 <div class="item">${item.notes}</div>
               </div>
             </div>

@@ -12,7 +12,10 @@ class CalendarView extends LitElement {
         .wholeWrapper {
           display: flex;
           padding: 0px 15px;
-        } 
+        }
+        .calendarWrapper {
+          width: 100%;
+        }
         .mty-tsk {
           margin: 44px 0px 0px 10px;
           font-family: 'Roboto', sans-serif;
@@ -21,7 +24,7 @@ class CalendarView extends LitElement {
           padding: 10px;
         }
         .tasksWrapper {
-          width: 40%;
+          width: 30%;
           overflow-y: auto;
         }
         .modal {
@@ -34,7 +37,7 @@ class CalendarView extends LitElement {
       calendarData: { type: Array },
       tasksData: { type: Array },
       userId: { type: Number},
-      modalInfo: { type: Array },
+      modalInfo: { type: Array }
     }
   }
   constructor() {
@@ -43,13 +46,12 @@ class CalendarView extends LitElement {
     this.tasksData = [];
     this.userId = 0;
     this.modalInfo = [];
-
   }
 
   modal(e) {
     const modal = this.shadowRoot.getElementById('modal-window');
     modal.style.display= "block";
-    this.modalInfo = e.detail;
+    this.modalInfo = [e.detail];
   }
 
   closeModal(e) {

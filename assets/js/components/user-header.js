@@ -9,6 +9,7 @@ class UserHeader extends LitElement {
     return {
       appName: { type: String },
       usId: { type: Number },
+      currentD: { type: Object },
     }
   }
 
@@ -16,6 +17,7 @@ class UserHeader extends LitElement {
     super();
     this.appName = 'Bethink';
     this.usId = 0;
+    this.currentD = new Date();
    }
 
   menu(e) {
