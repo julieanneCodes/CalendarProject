@@ -4,7 +4,6 @@ namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolver as OptionsResolverOptionsResolver;
 use Symfony\Component\Security\Core\Security;
 

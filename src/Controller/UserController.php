@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\UserConfigType;
 use App\Repository\UserRepository;
+use App\Repository\ViewConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,15 +39,20 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, ViewConfigRepository $configRepo ): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $defaultView = $configRepo->findOneBy(['id' => 1]);
+        $singleView = $configRepo->findOneBy(['id' => 2]);
+        $form = $this->createForm(UserConfigType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('user_index');
+            if($user->getViewConfig() === $defaultView) {
+                return $this->redirectToRoute('double');
+            } else if($user->getViewConfig() === $singleView) {
+                return $this->redirectToRoute('single_calendar');
+            }
         }
 
         return $this->render('user/edit.html.twig', [
