@@ -1,33 +1,26 @@
-import { LitElement, html, css } from 'lit-element';
-import { dateFormatter } from '../utils/functions';
+import { LitElement, html } from 'lit-element';
 import { modalStyles } from '../css/modal-styles';
-class CalendarModal extends LitElement {
+import { dateFormatter } from '../utils/functions';
+class TaskModal extends LitElement {
   static get styles() {
-    return [ modalStyles ]
-  } 
+    return [modalStyles]
+  }
 
   static get properties() {
     return {
-      eventInfo: { type: Array },
+      taskInfo: { type: Array }
     }
   }
 
   constructor() {
     super();
-    this.eventInfo = [];
+    this.taskInfo = [];
   }
 
   closeModal() {
     const display = 'none';
     const event = new CustomEvent('modal-display', {
       detail: display,
-    });
-    this.dispatchEvent(event);
-  }
-
-  moreModal(item) {
-    const event = new CustomEvent('more-modal', {
-      detail: item,
     });
     this.dispatchEvent(event);
   }
@@ -42,35 +35,28 @@ class CalendarModal extends LitElement {
             <button class="material-icons btn">delete_outline</button>
             <button class="material-icons btn" @click="${this.closeModal}">close</button>
           </div>
-            ${this.eventInfo.map(item => html`
+            ${this.taskInfo.map(item => html`
             <div class="event-info" id="eventInfo">
               <div> 
                 <div class="item">
                   <div class="item detail">
-                    ${item.eventname || item.moreEvents.map(x => html`
-                      <div class="moreEvnt" @click="${() => this.moreModal(x)}">${x.eventname || dateFormatter(x).weekDay}
-                      </div>
-                      `)
-                    }
+                    ${item.taskname}
                   </div>
                   <div class="item detail">
                     ${dateFormatter(item.day).display}
-                    ${dateFormatter(item.time).hour}
                   </div>
                   <div class="item detail">
-                    ${dateFormatter(item.secondday).display}
-                    ${dateFormatter(item.secondtime).hour}
-                  </div>
-                  <div class="item detail">
+                    <span class="material-icons">notes</span>
                     ${item.notes}
                   </div>
                 </div>
               </div>
             </div>
             `)}
-          </div>    
-      </div>`;
+          </div>
+          
+      </div>
+    `;
   }
 }
-
-customElements.define('calendar-modal', CalendarModal);
+customElements.define('task-modal', TaskModal);

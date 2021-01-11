@@ -4,7 +4,7 @@ class Tasks extends LitElement {
   static get styles() {
     return css`
       .tasksWrapper {
-        margin: 44px 0px 0px 10px;
+        margin-left: 10px;
       }
       .tsk-item {
         background-color: #5F8FB4;
@@ -31,11 +31,18 @@ class Tasks extends LitElement {
     this.data= [];
   }
 
+  openModal(item) {
+    const event = new CustomEvent('modal-open', {
+        detail: item
+    });
+    this.dispatchEvent(event);
+  }
+
   render() {
     return html`
       <div class="tasksWrapper">
         ${this.data.map(item => html`
-          <div class="tsk-item">
+          <div class="tsk-item" @click="${() => this.openModal(item)}">
             <div class="dateWrap">${dateFormatter(item.day).default}</div>
             <div class="nameWrap">${item.taskname}</div>
           </div>

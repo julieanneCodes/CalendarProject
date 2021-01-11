@@ -113,7 +113,8 @@ class Calendar extends LitElement {
         if(events.length >=3){
             this.more = {
                 eventsLength: events.length - 1 + " more",
-                moreEvents: [...events],
+                moreEvents: [item.date, ...events],
+                className: "evenMore",
             };
             events = [events[0], this.more];
         }
@@ -127,7 +128,15 @@ class Calendar extends LitElement {
         this.dispatchEvent(event);
     }
 
+    currentMonthInfo(info) {
+        const event = new CustomEvent('month-info', {
+            detail: info
+        });
+        this.dispatchEvent(event);
+    }
+
     calendar(date) {
+        this.currentMonthInfo(this.currentDate);
         this.daysArray = this.currentMonthDays(date);
         this.previousMDays = this.previousMonthDays(date);
         this.nextMDays = this.nextMonthDays(date);
@@ -139,7 +148,7 @@ class Calendar extends LitElement {
                     <div class="daysWrap" id="">
                         ${item.dayOfMonth}
                         ${this.dateExists(item).map(x => 
-                            html`<div class="eventWrap" @click="${ () => this.openModal(x)}">${(x.eventname || x.eventsLength ) || x.taskname }</div>
+                            html`<div class="eventWrap ${x.className ||""}" @click="${ () => this.openModal(x)}">${(x.eventname || x.eventsLength ) || x.taskname }</div>
                         `)}
                     </div>
                 `)}
@@ -151,6 +160,7 @@ class Calendar extends LitElement {
         this.currentDate = new Date();
         this.calendar(this.currentDate);
     }
+    
     async firstUpdated() {
         await this.updateComplete;
         const calendar = this.shadowRoot.querySelector('.calendarWrap');
