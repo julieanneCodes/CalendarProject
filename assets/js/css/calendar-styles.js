@@ -2,7 +2,8 @@ import { css } from 'lit-element';
 export const calendarStyles = css`
   .calendarWrap {
   display: grid;
-  height: 510px;
+  min-height: 450px;
+  max-height: 451px;
   grid-template-columns: repeat(7, 1fr);
   }
   .namesWrap {
@@ -12,7 +13,7 @@ export const calendarStyles = css`
     grid-template-columns: repeat(7, 1fr);
   }
   .daysWrap {
-  min-height: 75px;
+  min-height: 60px;
   position: relative;
   padding: 5px 5px 0px 5px;
   border: 1px solid #D9D9D6;
@@ -20,11 +21,15 @@ export const calendarStyles = css`
   }
   .eventWrap {
     color: whitesmoke;
-    background-color: #5F8FB4;
+    background-color: #5F8DDA;
     border-radius: 5px;
     cursor: pointer;
     padding: 2px 0px 2px 4px;
     margin-top: 2px;
+  }
+  .evenMore {
+    background-color: #C6C4D2;
+    color: #6C6A81;
   }
   .mth-wrp {
     font-size: 20px;
@@ -33,7 +38,7 @@ export const calendarStyles = css`
   .stepperWrap {
     position: absolute;
     right: 320px;
-    top: 30px;
+    top: 25px;
     display: inline-flex;
     align-items: center;
   }

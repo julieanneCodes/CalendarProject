@@ -45,7 +45,7 @@ export const headerStyles = css `
   .burgerMenu {
     position: absolute;
     right: 6px;
-    top: 26px;
+    top: 20px;
   }
   .userWrap {
     position: relative;
