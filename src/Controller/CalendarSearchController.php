@@ -3,39 +3,28 @@
 namespace App\Controller;
 
 use App\Repository\CalendarRepository;
+use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class CalendarSearchController extends AbstractController
 {
     /**
      * @Route("/search", name="search", methods={"GET"})
      */
-    public function search(Request $request, CalendarRepository $calendarRepository)
+    public function search(Request $request, CalendarRepository $calendarRepository, SerializerInterface $serializer, TaskRepository $taskRepository)
     {
-        $requestString = $request->get('query');
+        $requestString = $request->get('event');
+        $userId = $request->get('userIde');
+        $entity =  $serializer->serialize($calendarRepository->findByField($requestString, $userId), 'json', ['groups' => 'calendar_data']);
 
-        $entity = $calendarRepository->findByField($requestString);
-
-        if(!$entity) {
-            $result['calendar']['error'] = "No results found :(";
-        } else {
-            $result['calendar'] = $this->getStuff($entity);
+        if(strlen($entity) <= 2) {
+            $entity =  $serializer->serialize($taskRepository->findAllByField($requestString, $userId), 'json', ['groups' => 'tasks_data']);
         }
-        return new Response(json_encode($result));
-    }
 
-    public function getStuff($entity) {
-        foreach($entity as $ent){
-            $dates[$ent->getId()] = [
-            $ent->getTime(),
-            $ent->getDay(),
-            $ent->getNotes(),
-            $ent->getEventName(),
-        ];
-        }
-        return $dates;
+        return new Response($entity);
     }
 }

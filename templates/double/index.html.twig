@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Bethink | Calendar & Tasks{% endblock %}
 {% block body %}
-    {{ include('search/searcher.html.twig') }}
+    <searcher-view userIde="{{ userId }}"></searcher-view>
     <calendar-view id="content" calendarData="{{ data }}" tasksData="{{ taskData }}" userId ="{{ userId }}"></calendar-view>
 {% endblock %}
