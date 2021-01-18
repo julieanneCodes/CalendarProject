@@ -110,7 +110,7 @@ class Calendar extends LitElement {
     
     dateExists(item) {
         let events = this.data.filter(x => dateFormatter(x.day).databased == item.date.getTime() || (dateFormatter(x.secondday).databased >= item.date.getTime() && dateFormatter(x.day).databased <= item.date.getTime() ));
-        if(events.length >=3){
+        if(events.length >= 3){
             this.more = {
                 eventsLength: events.length - 1 + " more",
                 moreEvents: [item.date, ...events],

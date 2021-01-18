@@ -5,6 +5,8 @@ class Tasks extends LitElement {
     return css`
       .tasksWrapper {
         margin-left: 10px;
+        height: 450px;
+        overflow-y: scroll;
       }
       .tsk-item {
         background-color: #5F8FB4;

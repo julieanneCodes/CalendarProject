@@ -5,7 +5,9 @@ export const headerStyles = css `
     font-family: 'Lobster', cursive;
   }
   .pseudoHeader {
-    display: flex;
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     position: relative;
     align-items: center;
     padding: 0px 15px;
@@ -44,8 +46,8 @@ export const headerStyles = css `
   }
   .burgerMenu {
     position: absolute;
-    right: 6px;
-    top: 20px;
+    right: 0;
+    grid-column-start: 7;
   }
   .userWrap {
     position: relative;
@@ -85,13 +87,15 @@ export const headerStyles = css `
       position: relative;
   }
   .leaf {
-      position: relative;
+      position: absolute;
+      left: 110px;
   }
-
   .title {
     color: #256BA2;
-    margin-left: 15px;
     font-family: 'Libre Baskerville', serif;
     font-size: 20px;
+  }
+  .title.col {
+    grid-column-start: 3;
   }
 `;
