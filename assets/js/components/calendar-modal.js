@@ -47,8 +47,8 @@ class CalendarModal extends LitElement {
               <div> 
                 <div class="item">
                   <div class="item detail">
-                    ${item.eventname || item.moreEvents.map(x => html`
-                      <div class="moreEvnt" @click="${() => this.moreModal(x)}">${x.eventname || dateFormatter(x).weekDay}
+                    ${item.eventname || item.taskname || item.moreEvents.map(x => html`
+                      <div class="moreEvnt" @click="${() => this.moreModal(x)}">${x.eventname || x.taskname || dateFormatter(x).weekDay}
                       </div>
                       `)
                     }

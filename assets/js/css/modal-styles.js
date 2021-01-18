@@ -3,7 +3,7 @@ export const modalStyles = css`
   .mdl-wrp {
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 50px;
     left: 0;
     top: 0;
     width: 100%;
@@ -19,8 +19,9 @@ export const modalStyles = css`
     border: 1px solid #888;
     width: 50%;
     border-radius: 5px;
+    max-height: 460px;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
   }
   @keyframes animatetop {
     from {top:-300px; opacity:0}
