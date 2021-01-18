@@ -27,6 +27,14 @@ class TaskRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllByField($name, $id) {
+        return $this->createQueryBuilder('t')
+        ->andWhere('t.taskname = :val', 't.user = :id')
+        ->setParameters(['val' => $name, 'id' => $id])
+        ->getQuery()
+        ->getResult();
+    }
     // /**
     //  * @return Task[] Returns an array of Task objects
     //  */

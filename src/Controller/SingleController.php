@@ -31,10 +31,10 @@ class SingleController extends AbstractController
             'data' => $jsonData,
             'user' => $user,
             'userId' => $id,
-            'route' => 'single_tasks',
+            'route' => '/single/tasks',
             'routeName' => 'view tasks',
-            'padding' => '0px 30px 0px 30px',
-            'titlePadding' => '30px',
+            'title' => 'Calendar',
+            'addRoute' => '/calendar/new',
         ]);
     }
     /**
@@ -49,8 +49,11 @@ class SingleController extends AbstractController
         return $this->render('single/index.html.twig', [
             'data' => $jsonData,
             'user' => $user,
-            'route' => 'single_calendar',
-            'routeName' => 'view events'
+            'userId' => $id,
+            'route' => '/single',
+            'routeName' => 'view events',
+            'title' => 'Tasks',
+            'addRoute' => '/task/new',
         ]);
     }
 }

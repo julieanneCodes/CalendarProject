@@ -42,7 +42,7 @@ class CalendarController extends AbstractController
             if($user->getViewConfig() === $defaultView) {
                 return $this->redirectToRoute('double');
             } else if($user->getViewConfig() === $singleView) {
-                return $this->redirectToRoute('single-calendar');
+                return $this->redirectToRoute('single_calendar');
             }
         }
 

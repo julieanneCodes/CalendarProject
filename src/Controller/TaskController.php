@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use App\Repository\ViewConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -15,21 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TaskController extends AbstractController
 {
-    /**
-     * @Route("/", name="task_index", methods={"GET"})
-     */
-    public function index(TaskRepository $taskRepository): Response
+    private $security;
+    public function __construct(Security $security)
     {
-        return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
-        ]);
+        $this->security= $security;
     }
-
     /**
      * @Route("/new", name="task_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ViewConfigRepository $configRepo): Response
     {
+        $defaultView = $configRepo->findOneBy(['id' => 1]);
+        $singleView = $configRepo->findOneBy(['id' => 2]);
+        $user = $this->security->getUser();
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
@@ -39,7 +39,11 @@ class TaskController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            return $this->redirectToRoute('task_index');
+            if($user->getViewConfig() === $singleView) {
+                return $this->redirectToRoute('single_tasks');
+            } else if($user-> getViewConfig() === $defaultView) {
+                return $this->redirectToRoute('double');
+            }
         }
 
         return $this->render('task/new.html.twig', [
