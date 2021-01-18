@@ -23,19 +23,17 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('func', './assets/js/functions.js')
     .addEntry('loginFunctions', './assets/js/functions/login-functions.js')
     .addEntry('burger-menu', './assets/js/burger-menu.js')
     .addEntry('calendarView', './assets/js/view/calendar-view.js')
+    .addEntry('singleView', './assets/js/view/single-view.js')
+    .addEntry('modal', './assets/js/components/calendar-modal.js')
     .addEntry('config', './assets/styles/config.css')
-    .addEntry('customized', './assets/styles/customized.css')
-    .addEntry('double', './assets/styles/double.css')
     .addEntry('form', './assets/styles/form.css')
     .addEntry('header', './assets/styles/header.css')
     .addEntry('home', './assets/styles/home.css')
     .addEntry('login', './assets/styles/login.css')
-    .addEntry('single', './assets/styles/single.css')
-    .addEntry('searcher', './assets/styles/searcher.css')
+    .addEntry('searcher', './assets/js/view/searcher-view.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
