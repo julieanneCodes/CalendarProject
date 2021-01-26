@@ -49,50 +49,34 @@ class TaskController extends AbstractController
         return $this->render('task/new.html.twig', [
             'task' => $task,
             'form' => $form->createView(),
+            'buttonDisplay' => 'none',
+            'backRoute' => $user->getViewConfig() === $defaultView ? "http://127.0.0.1:8000/double" : "http://127.0.0.1:8000/single",
         ]);
     }
 
     /**
-     * @Route("/{id}", name="task_show", methods={"GET"})
+     * @Route("/tasking/edit", name="task-edit", methods={"GET", "POST"})
      */
-    public function show(Task $task): Response
+    public function editTest(Request $request, TaskRepository $taskRepo)
     {
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
-        ]);
+        $data = json_decode($request->getContent(), true);
+        $tId = $data["id"];
+        $taskName = $data["name"];
+        $day = $data["day"];
+        $notes = $data["notes"];
+
+        $taskRepo->edit($tId, $taskName, $day, $notes);
+
+        return new Response();
     }
 
     /**
-     * @Route("/{id}/edit", name="task_edit", methods={"GET","POST"})
+     * @Route("/delete/{id}", name="task_delete", methods={"DELETE"})
      */
-    public function edit(Request $request, Task $task): Response
+    public function delete(int $id, TaskRepository $taskRepository)
     {
-        $form = $this->createForm(TaskType::class, $task);
-        $form->handleRequest($request);
+        $taskRepository->deleteTask($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('task_index');
-        }
-
-        return $this->render('task/edit.html.twig', [
-            'task' => $task,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="task_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Task $task): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($task);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('task_index');
+        return new Response();
     }
 }

@@ -94,8 +94,18 @@ export const headerStyles = css `
     color: #256BA2;
     font-family: 'Libre Baskerville', serif;
     font-size: 20px;
+    text-align: center;
   }
-  .title.col {
-    grid-column-start: 3;
+  .btn {
+    border: none;
+    background-color: transparent;
+    color: #256BA2;
+    font-size: 40px;
+    cursor: pointer;
+    outline: none;
+    width: 50px;
+  }
+  .tiny-modal {
+    display: none;
   }
 `;

@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Task{% endblock %}
-
+{% block stylesheets %}
+    {{ encore_entry_link_tags('addForm') }}
+{% endblock %}
 {% block body %}
-    <h1>Create new Task</h1>
-
-    {{ include('task/_form.html.twig') }}
+    <user-header display="{{ buttonDisplay }}"></user-header>
+    <a class="material-icons back" href="{{ backRoute }}">keyboard_backspace</a>
+    <div class="container">
+        {{ include('task/_form.html.twig') }}
+    </div>
 
 {% endblock %}

@@ -3,8 +3,6 @@
   margin: auto;
 }
 .frm-wrp {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   border: 1px solid #D9D9D6;
 }
 input {
@@ -46,6 +44,5 @@ select {
   padding: 30px;
 }
 .delete {
-  grid-column-start: 2;
   padding: 0px 30px 30px 220px;
 }

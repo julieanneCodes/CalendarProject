@@ -66,4 +66,20 @@ export const calendarStyles = css`
   .btn-sm:focus {
     outline: none;
   }
+  .eventWrap.before {
+    opacity: 0.7;
+  }
+  .today {
+    background-color: #5F8FB4;
+    color: whitesmoke;
+    border-radius: 50%;
+    padding: 1.5px;
+    font-size: 14.5px;
+  }
+  .nameWrap {
+    text-align: center;
+  }
+  .default, .nameWrap {
+    color: #6C6A81;
+  }
 `;

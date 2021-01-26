@@ -31,7 +31,6 @@ class DoubleController extends AbstractController
             'userId' => $id,
             'taskData' => $tasksData,
             'user' => $user,
-            'tasks' => $taskRepository->findAllById($id)
         ]);
     }
 }

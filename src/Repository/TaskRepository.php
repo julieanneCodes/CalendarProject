@@ -21,8 +21,8 @@ class TaskRepository extends ServiceEntityRepository
 
     public function findAllById($id)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.user = :val')
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.user = :val')
             ->setParameter('val', $id)
             ->getQuery()
             ->getResult();
@@ -35,32 +35,27 @@ class TaskRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
-    // /**
-    //  * @return Task[] Returns an array of Task objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Task
+    public function edit($id, $task, $day, $notes)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        ->update()
+        ->set('t.taskname', ':task')
+        ->set('t.day', ':dayone')
+        ->set('t.notes', ':notes')
+        ->andWhere('t.id = :val')
+        ->setParameters(['val' => $id, 'task' => $task, 'dayone' => $day, 'notes' => $notes])
+        ->getQuery()
+        ->execute();
+
     }
-    */
+    public function deleteTask($id)
+    {
+        return $this->createQueryBuilder('t')
+        ->delete()
+        ->andWhere('t.id =:val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->execute();
+    }
 }

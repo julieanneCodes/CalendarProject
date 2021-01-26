@@ -35,6 +35,7 @@ class Calendar
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="calendars")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 

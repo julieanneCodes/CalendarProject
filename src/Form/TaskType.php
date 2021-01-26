@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Task;
-use App\Entity\User;
 use App\Form\DataTransformer\UserIdTransformer;
 use App\Form\Type\HiddenIdType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;

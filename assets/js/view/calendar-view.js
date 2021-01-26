@@ -4,6 +4,7 @@ import '../components/calendar';
 import '../components/tasks';
 import '../components/user-header';
 import '../components/calendar-modal';
+import '../components/edit-modal';
 
 class CalendarView extends LitElement {
 
@@ -27,17 +28,8 @@ class CalendarView extends LitElement {
         .tasksWrapper {
           width: 30%;
         }
-        .modal {
+        .modal, .edit {
           display: none;
-        }
-        .btn {
-          border: none;
-          background-color: transparent;
-          color: #256BA2;
-          font-size: 40px;
-          position: absolute;
-          bottom: 20px;
-          right: 35px;
         }
     ` ]
   }
@@ -47,6 +39,7 @@ class CalendarView extends LitElement {
       tasksData: { type: Array },
       userId: { type: Number},
       modalInfo: { type: Array },
+      editInfo: { type: Array },
       taskInfo: { type: Array },
       month: { type: String }
     }
@@ -57,6 +50,7 @@ class CalendarView extends LitElement {
     this.tasksData = [];
     this.userId = 0;
     this.modalInfo = [];
+    this.editInfo = [];
     this.taskInfo = [];
     this.month = '';
 
@@ -77,6 +71,12 @@ class CalendarView extends LitElement {
     this.month = dateFormatter(e.detail).monthYear;
   }
 
+  edit(e){
+    const modal = this.shadowRoot.getElementById('edit-window');
+    modal.style.display = 'block';
+    this.editInfo = e.detail;
+  }
+
   render() {
     return html`
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -87,13 +87,13 @@ class CalendarView extends LitElement {
           </calendar-component>
         </div>
         <div class="tasksWrapper">
-          ${this.tasksData.length > 1 ? 
+          ${this.tasksData.length > 0 ? 
             html`<task-component .data="${this.tasksData}" @modal-open="${this.modal}"></task-component>`
             : html`<div class="mty-tsk">There's not tasks yet &#128580;</div>`}
         </div>
       </div>
-      <button class="material-icons btn">add_circle</button>
-      <calendar-modal class="modal" id="modal-window" @modal-display="${this.closeModal}" .eventInfo="${this.modalInfo}" @more-modal="${this.modal}"></calendar-modal>
+      <calendar-modal class="modal" id="modal-window" @modal-display="${this.closeModal}" .eventInfo="${this.modalInfo}" @more-modal="${this.modal}" @edit-modal="${this.edit}"></calendar-modal>
+      <edit-modal id="edit-window" class="edit" .editInfo="${this.editInfo}" @modal-display="${this.closeModal}"></edit-modal>
     `;
   }
 }

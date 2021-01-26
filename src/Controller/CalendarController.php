@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Serializer\SerializerInterface;
+
 /**
  * @Route("/calendar")
  */
@@ -49,52 +49,38 @@ class CalendarController extends AbstractController
         return $this->render('calendar/new.html.twig', [
             'calendar' => $calendar,
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
+            'buttonDisplay' => 'none',
+            'backRoute' => $user->getViewConfig() === $defaultView ? "http://127.0.0.1:8000/double" : "http://127.0.0.1:8000/single",
         ]);
     }
 
     /**
-     * @Route("/{id}", name="calendar_show", methods={"GET"})
+     * @Route("/event/edit", name="event-edit", methods={"GET", "POST", "PUT"})
      */
-    public function show(Calendar $calendar): Response
+    public function editTest(Request $request, CalendarRepository $calendarRepository)
     {
-        return $this->render('calendar/show.html.twig', [
-            'calendar' => $calendar,
-        ]);
+        $data = json_decode($request->getContent(), true);
+        $cId = $data["id"];
+        $eventName = $data["name"];
+        $fDay = $data["fDay"];
+        $dayTwo = $data["sDay"];
+        $timeOne = $data["fTime"];
+        $timeTwo = $data["sTime"];
+        $notes = $data["notes"];
+
+        $calendarRepository->edit($cId, $eventName, $fDay, $dayTwo, $timeOne, $timeTwo, $notes);
+
+        return new Response();
     }
 
     /**
-     * @Route("/{id}/edit", name="calendar_edit", methods={"GET","POST"})
+     *@Route("/event/delete/{id}", name="event-delete", methods={"DELETE"})
      */
-    public function edit(Request $request, Calendar $calendar): Response
+    public function deleteEvent(int $id, CalendarRepository $calendarRepository)
     {
-        $form = $this->createForm(CalendarType::class, $calendar);
-        $form->handleRequest($request);
+        $calendarRepository->deleteEvent($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('calendar_index');
-        }
-
-        return $this->render('calendar/edit.html.twig', [
-            'calendar' => $calendar,
-            'form' => $form->createView(),
-        ]);
+        return new Response();
     }
-
-    /**
-     * @Route("/{id}", name="calendar_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Calendar $calendar): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$calendar->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($calendar);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('calendar_index');
-    }
-
 }

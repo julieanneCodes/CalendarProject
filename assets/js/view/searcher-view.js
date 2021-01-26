@@ -1,11 +1,12 @@
 import { LitElement, html, css } from 'lit-element';
 import { commonFetch, url, noFound} from '../utils/utils';
 import '../components/searcher-component';
+import '../components/edit-modal';
 
 class SearcherView extends LitElement {
   static get styles() {
     return css`
-      .modal {
+      .modal, .edit {
         display: none;
       }
     `;
@@ -15,7 +16,8 @@ class SearcherView extends LitElement {
     return {
       userIde: { type: Number },
       modalInfo: { type: Array },
-      requestData: { type: Array }
+      requestData: { type: Array },
+      editInfo: { type: Array }
     }
   }
 
@@ -24,10 +26,17 @@ class SearcherView extends LitElement {
     this.userIde = 0;
     this.modalInfo = [];
     this.requestData = [];
+    this.editInfo = [];
   }
 
   modal(e) {
      this.modalInfo = [e.detail];
+  }
+
+  edit(e){
+    const modal = this.shadowRoot.getElementById('edit-window');
+    modal.style.display = 'block';
+    this.editInfo = e.detail;
   }
 
   async getData(e) {
@@ -56,7 +65,8 @@ class SearcherView extends LitElement {
   render() {
     return html`
       <searcher-component .userIden="${this.userIde}" @search-open="${this.getData}"></searcher-component>
-      <calendar-modal class="modal" id="modal-window" @modal-display="${this.closeModal}" @more-modal="${this.modal}" .eventInfo="${this.modalInfo}"></calendar-modal>
+      <calendar-modal class="modal" id="modal-window" @modal-display="${this.closeModal}" @more-modal="${this.modal}" .eventInfo="${this.modalInfo}" @edit-modal="${this.edit}"></calendar-modal>
+      <edit-modal class="edit" id="edit-window" .editInfo="${this.editInfo}"></edit-modal>
     `;
   }
 }

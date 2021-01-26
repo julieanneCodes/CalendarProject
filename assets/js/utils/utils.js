@@ -1,4 +1,6 @@
 export const url = 'http://127.0.0.1:8000';
+export const newEvent = 'http://127.0.0.1:8000/calendar/new';
+export const newTask = 'http://127.0.0.1:8000/task/new';
 export const noFound = 'No results found :(';
 const errorHandler = (response) => {
   if (!response.ok) {

@@ -14,6 +14,7 @@ export const dateFormatter = (date_) => {
   const weekDayShort = days[date.getDay()];
   const hour = date.getHours();
   const minute = date.getMinutes();
+  const seconds = date.getSeconds();
 
   return {
     default: monthName + ' ' + monthDay + ', ' + year,
@@ -23,6 +24,7 @@ export const dateFormatter = (date_) => {
     monthName: monthName,
     monthYear: monthName + ' ' + year,
     hour: (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute) + ' h',
+    hourInput: (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute),
     input: `${date.getFullYear()}-${date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${
       date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
     }`,

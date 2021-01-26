@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { LitElement, html } from 'lit-element';
+import { nothing } from 'lit-html';
 import { calendarStyles } from '../css/calendar-styles';
 import { months, days } from '../utils/constants';
 import { dateFormatter } from '../utils/functions';
@@ -62,6 +63,7 @@ class Calendar extends LitElement {
        
     }
     currentMonthDays(date) {
+        const today = dateFormatter(new Date).databased;
         return [...Array(this.calendarDays(date))].map((day, index) => {
             return {
                 date: new Date(date.getFullYear(), date.getMonth(), index + 1),
@@ -110,6 +112,7 @@ class Calendar extends LitElement {
     
     dateExists(item) {
         let events = this.data.filter(x => dateFormatter(x.day).databased == item.date.getTime() || (dateFormatter(x.secondday).databased >= item.date.getTime() && dateFormatter(x.day).databased <= item.date.getTime() ));
+        
         if(events.length >= 3){
             this.more = {
                 eventsLength: events.length - 1 + " more",
@@ -142,13 +145,20 @@ class Calendar extends LitElement {
         this.nextMDays = this.nextMonthDays(date);
         this.currentMonth = this.currentDate.getMonth();
         const arr = [...this.previousMDays, ...this.daysArray, ...this.nextMDays];
+        const today = dateFormatter(new Date).databased;
         return html`
            <div class="calendarWrap">
-               ${arr.map(item => html`
+               ${arr.map((item, i) => html`
                     <div class="daysWrap" id="">
-                        ${item.dayOfMonth}
-                        ${this.dateExists(item).map(x => 
-                            html`<div class="eventWrap ${x.className ||""}" @click="${ () => this.openModal(x)}">${(x.eventname || x.eventsLength ) || x.taskname }</div>
+                        ${days.map(day => i < 7 ? day === days[i] ? html`<div class="nameWrap">${day}</div>` : nothing : nothing)}
+                        <span class="${dateFormatter(item.date).databased === today ? "today" : "default"}">
+                            ${item.dayOfMonth}
+                        </span>
+                        ${this.dateExists(item).map(x =>
+                            html`
+                                <div class="eventWrap ${x.className ||""} ${dateFormatter(item.date).databased < today ? "before" : ""}" @click="${ () => this.openModal(x)}">
+                                    ${(x.eventname || x.eventsLength ) || x.taskname }
+                                </div>
                         `)}
                     </div>
                 `)}

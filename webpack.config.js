@@ -33,6 +33,7 @@ Encore
     .addEntry('header', './assets/styles/header.css')
     .addEntry('home', './assets/styles/home.css')
     .addEntry('login', './assets/styles/login.css')
+    .addEntry('addForm', './assets/styles/add-form.css')
     .addEntry('searcher', './assets/js/view/searcher-view.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

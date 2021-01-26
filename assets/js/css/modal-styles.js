@@ -80,4 +80,26 @@ export const modalStyles = css`
     cursor: auto;
     text-align: center;
   }
+  .btn-cancel,
+  .btn-del {
+    height: 30px;
+    width: 100px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    color: whitesmoke;
+    background-color: #5F8DDA;
+    cursor: pointer;
+  }
+  .btn-del {
+    background-color: #BD3742;
+  }
+  h1 {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  }
+  .buttons {
+    text-align: center;
+  }
 `;

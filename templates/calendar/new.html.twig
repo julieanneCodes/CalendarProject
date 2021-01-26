@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Calendar{% endblock %}
-
+{% block stylesheets %}
+    {{ encore_entry_link_tags('addForm') }}
+{% endblock %}
 {% block body %}
-    <h1>Create new Calendar</h1>
-
-    {{ include('calendar/_form.html.twig') }}
+    <user-header display="{{ buttonDisplay }}"></user-header>
+    <a class="material-icons back" href="{{ backRoute }}">keyboard_backspace</a>
+    <div class="container">
+        {{ include('calendar/_form.html.twig') }}
+    </div>
 
 {% endblock %}

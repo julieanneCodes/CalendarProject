@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title %}Bethink{% endblock %}
 {% block body %}
-    {{ include('search/searcher.html.twig') }}
+
     <div class="single-layout">
         <div>
+            <searcher-view userIde="{{ userId }}"></searcher-view>
             <single-view calendarData="{{ data }}" userIdentity="{{ userId }}" title="{{ title }}" route="{{ route }}" routeName="{{ routeName }}" addRoute="{{ addRoute }}"></single-view>
         </div>
     </div>

@@ -3,9 +3,18 @@ import { headerStyles } from '../css/header-styles';
 import { url } from '../utils/utils';
 import '../components/tiny-modal';
 
-class UserHeader extends LitElement {
+class SingleHeader extends LitElement {
   static get styles() {
-    return [ headerStyles ]
+    return [ headerStyles, css`
+      .link {
+        color: #256BA2;
+        font-size: 20px;
+      }
+      span .link {
+        position: absolute;
+        bottom: 30px;
+      }
+    `]
   }
 
   static get properties() {
@@ -15,7 +24,9 @@ class UserHeader extends LitElement {
       currentD: { type: Object },
       month: { type: String },
       title: { type: String },
-      display: { type: String }
+      route: { type: String },
+      viewRoute: { type: String },
+      add: { type: String }
     }
   }
 
@@ -25,8 +36,10 @@ class UserHeader extends LitElement {
     this.usId = 0;
     this.currentD = new Date();
     this.month = '';
-    this.title = 'Calendar & Tasks';
-    this.display = 'block';
+    this.title = '';
+    this.route = '';
+    this.viewRoute = '';
+    this.add = '';
    }
 
   menu(e) {
@@ -39,20 +52,14 @@ class UserHeader extends LitElement {
       burgerMenu.style.height = '0%';
     }
   }
-  tinyModal() {
-    const modal = this.shadowRoot.getElementById('modal');
-    modal.style.display = 'block';
+
+  redirect(item) {
+    location.href = item;
   }
 
   closeModal(e) {
     const modal = e.target;
     modal.style.display= e.detail;
-  }
-
-  async firstUpdated() {
-    await this.updateComplete;
-    const button = this.shadowRoot.getElementById('del');
-    button.style.display = this.display;
   }
 
   render() {
@@ -62,7 +69,12 @@ class UserHeader extends LitElement {
           <a href="/home" class="home"><h1>${this.appName}</h1></a>
           <span class="material-icons leaf">eco</span>
           <h1 class="title col">${this.title}</h1>
-          <button class="material-icons btn" @click="${this.tinyModal}" id="del">add_circle</button>
+          <div>
+            <button class="material-icons btn" @click="${() => this.redirect(this.add)}">add_circle</button>
+            <span>
+              <a href="${this.route}" class="link">${this.viewRoute}</a>
+            </span>
+          </div>
           <h1 class="title">${this.month}</h1>
           <div class="burgerMenu">
             <button class="burger material-icons menu" id="open-brg" @click="${this.menu}">menu</button>
@@ -75,8 +87,7 @@ class UserHeader extends LitElement {
             <a href="${url}/logout">Logout</a>
           </div>
         </div>
-        <tiny-modal id="modal" class="tiny-modal" @modal-display="${this.closeModal}"></tiny-modal>
-    `;
+      `;
   }
 }
-customElements.define('user-header', UserHeader);
+customElements.define('single-header', SingleHeader);

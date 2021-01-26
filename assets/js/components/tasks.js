@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit-element';
 import { dateFormatter } from '../utils/functions';
+
 class Tasks extends LitElement {
   static get styles() {
     return css`
